@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
                 //start next activity
                 startActivity(
                         new Intent(SplashActivity.this,
-                                MyBookingActivity.class));
+                                MainActivity.class));
             }
         };
         Timer timer = new Timer();

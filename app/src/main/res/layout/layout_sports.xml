@@ -7,14 +7,14 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/sportsIcon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/sportsIconName"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
