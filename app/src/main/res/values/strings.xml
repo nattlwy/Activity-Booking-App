@@ -29,4 +29,29 @@
     <string name="txtReviewBookingTimeInfo">Mon 9:30 AM - 10:15 AM</string>
     <string name="txtReviewBookingCenterInfo">Bonsor Recreation Complex (BON)</string>
     <string name="txtReviewBookingFacilityInfo">BON Multi-purpose Room 4/5</string>
+    <string name="txtBookingConTitle">Booking Confirmation</string>
+    <string name="txtBookingConBtn">Confirm Booking</string>
+    <string name="txtBookingConActivity">Activity</string>
+    <string name="txtBookingConTime">Time</string>
+    <string name="txtBookingConLocation">Location</string>
+    <string name="txtBookingConConBooking">Confirm Booking</string>
+    <string name="txtBookingConTopic">Topic</string>
+    <string name="txtBookingConInfo">Information</string>
+    <string name="txtLoginTitle">Log In</string>
+    <string name="txtLoginUsername">Username/E-mail</string>
+    <string name="txtLoginPassword">Password</string>
+    <string name="txtLoginNotMember">Not a member yet? Click here to register</string>
+    <string name="txtRegisterTitle">Register</string>
+    <string name="txtRegisterEmail">Email address</string>
+    <string name="txtRegisterFirstN">First name</string>
+    <string name="txtRegisterLastN">Last name</string>
+    <string name="txtRegisterDOB">Date of Birth</string>
+    <string name="txtRegisterPassword">Password</string>
+    <string name="txtRegisterConPassword">Confirm password</string>
+    <string name="txtRegisterBurnaby">Are you a Burnaby Resident?</string>
+    <string name="txtRegisterBActivePass">I have a Be Active Pass</string>
+    <string name="txtRegisterBActivePassNum">Be Active Pass Number</string>
+    <string name="txtLoginBtn">Log In</string>
+    <string name="txtDateDOB">Jan 01 2020</string>
+
 </resources>
