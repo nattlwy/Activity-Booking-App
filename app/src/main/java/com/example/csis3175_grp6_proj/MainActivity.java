@@ -1,19 +1,25 @@
 package com.example.csis3175_grp6_proj;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SportsIconRecyclerViewAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements SportsIconRecyclerViewAdapter.OnItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     List<SportsIcon> SportsIconList = new ArrayList<>();
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements SportsIconRecycle
         recyclerViewIcons.setAdapter(adapter);
         recyclerViewIcons.setLayoutManager(gm);
 
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
     }
@@ -50,5 +58,22 @@ public class MainActivity extends AppCompatActivity implements SportsIconRecycle
 
     @Override
     public void onItemClick(int i) {
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent myIntent;
+        int itemId = item.getItemId();
+        if (itemId == R.id.profile) {
+            myIntent = new Intent(this, MyAccountActivity.class);
+            startActivity(myIntent);
+
+            return true;
+        }
+        else if (itemId == R.id.mybooking) {
+            myIntent = new Intent(this, MyBookingActivity.class);
+            startActivity(myIntent);
+        }
+        return false;
     }
 }

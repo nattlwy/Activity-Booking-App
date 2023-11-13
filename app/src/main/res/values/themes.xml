@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.Csis3175grp6proj" parent="Base.Theme.Csis3175grp6proj" />
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar" />
 </resources>

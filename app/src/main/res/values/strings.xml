@@ -14,8 +14,6 @@
     <string name="txtActivePassNumber">A123456</string>
     <string name="txtCredits">Credits:</string>
     <string name="txtCreditsAmount">0 CAD</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtActivityName">Table Tennis</string>
     <string name="txtActivityVenue">BON Multi-purpose Room 4/5</string>
     <string name="txtDateAndTime">Oct 31, 2023 Tue 8:30 AM - 10:30 AM</string>
