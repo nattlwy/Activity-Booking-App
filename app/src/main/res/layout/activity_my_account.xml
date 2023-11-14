@@ -184,27 +184,15 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewPassNumber" />
 
     <Button
-        android:id="@+id/btnEdit"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#4ca1af"
-        android:text="@string/txtBtnEdit"
-        android:textColorLink="#673AB7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewCredits" />
-
-    <Button
         android:id="@+id/btnLogOut"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#4ca1af"
         android:text="@string/txtBtnLogOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCredits" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

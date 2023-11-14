@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyBookingActivity">
+    tools:context=".MyBookingActivity"
+    android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
@@ -13,19 +14,19 @@
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItemUpcomingBookings"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Upcoming"></com.google.android.material.tabs.TabItem>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItemBookingHistory"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="History"></com.google.android.material.tabs.TabItem>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItemCancelledBookings"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancelled"></com.google.android.material.tabs.TabItem>
     </com.google.android.material.tabs.TabLayout>
@@ -33,21 +34,25 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/material_dynamic_neutral_variant95" >
 
     </androidx.viewpager2.widget.ViewPager2>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutMyBooking"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
 
-</RelativeLayout>
+</LinearLayout>
