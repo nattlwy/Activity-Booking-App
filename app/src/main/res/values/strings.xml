@@ -36,7 +36,7 @@
     <string name="txtBookingConTopic">Topic</string>
     <string name="txtBookingConInfo">Information</string>
     <string name="txtLoginTitle">Log In</string>
-    <string name="txtLoginUsername">Username/E-mail</string>
+    <string name="txtLoginUsername">E-mail</string>
     <string name="txtLoginPassword">Password</string>
     <string name="txtLoginNotMember">Not a member yet? Click here to register</string>
     <string name="txtRegisterTitle">Register</string>
