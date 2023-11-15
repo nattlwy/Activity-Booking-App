@@ -23,19 +23,22 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        RecyclerView recyclerViewIcons = findViewById(R.id.recyclerViewSportsImgMain);
+        // Populate Sports Grid Layout
+        AddData();
+        RecyclerView recyclerViewIcons = findViewById(R.id.recyclerViewSportsImgHome);
         SportsIconRecyclerViewAdapter adapter =  new SportsIconRecyclerViewAdapter(
                 SportsIconList,
-                this
+                HomeActivity.this
         );
 
-        GridLayoutManager gm = new GridLayoutManager(this, 3);
+        GridLayoutManager gm = new GridLayoutManager(HomeActivity.this, 3);
         recyclerViewIcons.setAdapter(adapter);
         recyclerViewIcons.setLayoutManager(gm);
 
+        // Populate Bottom Nav Bar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnItemSelectedListener(this);
+        bottomNavigationView.setOnItemSelectedListener(HomeActivity.this);
 
     }
 
