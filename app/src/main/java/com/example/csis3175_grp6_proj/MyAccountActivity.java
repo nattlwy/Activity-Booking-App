@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-public class MyAccountActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MyAccountActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +18,8 @@ public class MyAccountActivity extends AppCompatActivity implements BottomNaviga
         setContentView(R.layout.activity_my_account);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+        bottomNavigationView.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -27,12 +29,18 @@ public class MyAccountActivity extends AppCompatActivity implements BottomNaviga
         if (itemId == R.id.home) {
             myIntent = new Intent(this, MainActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
 
             return true;
         }
         else if (itemId == R.id.mybooking) {
             myIntent = new Intent(this, MyBookingActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
+
+            return true;
+        } else if (itemId == R.id.profile) {
+            return true;
         }
         return false;
     }

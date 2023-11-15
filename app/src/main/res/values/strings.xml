@@ -2,13 +2,12 @@
     <string name="app_name">csis3175-grp6-proj</string>
     <string name="mainPageAds">Ads</string>
     <string name="imgSplashDescription">Splash Screen</string>
-    <string name="txtUserName">Username</string>
+    <string name="txtUserName">Jamie Lee</string>
     <string name="txtUserEmail">Email</string>
-    <string name="txtMobile">Mobile:</string>
-    <string name="txtMobileInfo">+1-XXX-XXXX</string>
+    <string name="txtBirthday">Birthday:</string>
+    <string name="txtBirthdayInfo">1992-08-09</string>
     <string name="txtBeActivePass">Be Active Pass Holder:</string>
     <string name="txtBeActivePassNumber">Pass Number:</string>
-    <string name="txtBtnEdit">Edit Profile</string>
     <string name="txtBtnLogOut">Log Out</string>
     <string name="txtBeActivePassYesOrNo">Yes</string>
     <string name="txtActivePassNumber">A123456</string>
@@ -51,5 +50,8 @@
     <string name="txtRegisterBActivePassNum">Be Active Pass Number</string>
     <string name="txtLoginBtn">Log In</string>
     <string name="txtDateDOB">Jan 01 2020</string>
+    <string name="txtUpcoming">Upcoming</string>
+    <string name="txtHistory">History</string>
+    <string name="txtCancelled">Cancelled</string>
 
 </resources>

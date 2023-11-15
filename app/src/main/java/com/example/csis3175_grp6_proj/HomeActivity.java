@@ -10,11 +10,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements SportsIconRecyclerViewAdapter.OnItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements SportsIconRecyclerViewAdapter.OnItemClickListener, NavigationBarView.OnItemSelectedListener {
     List<SportsIcon> SportsIconList = new ArrayList<>();
     BottomNavigationView bottomNavigationView;
     @Override
@@ -33,7 +34,8 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
         recyclerViewIcons.setLayoutManager(gm);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnItemSelectedListener(this);
 
     }
 
@@ -60,12 +62,18 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
         if (itemId == R.id.profile) {
             myIntent = new Intent(this, MyAccountActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
 
             return true;
         }
         else if (itemId == R.id.mybooking) {
             myIntent = new Intent(this, MyBookingActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
+
+            return true;
+        } else if (itemId == R.id.home) {
+            return true;
         }
         return false;
     }

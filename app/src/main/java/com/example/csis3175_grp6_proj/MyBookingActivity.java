@@ -11,9 +11,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
-public class MyBookingActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MyBookingActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
 
     TabLayout tabLayout;
@@ -32,7 +33,8 @@ public class MyBookingActivity extends AppCompatActivity implements BottomNaviga
         myBookingViewPagerAdapter = new MyBookingViewPagerAdapter(this);
         viewPager2.setAdapter(myBookingViewPagerAdapter);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.mybooking);
+        bottomNavigationView.setOnItemSelectedListener(this);
         frameLayout = findViewById(R.id.frameLayoutMyBooking);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -74,12 +76,19 @@ public class MyBookingActivity extends AppCompatActivity implements BottomNaviga
         if (itemId == R.id.profile) {
             myIntent = new Intent(this, MyAccountActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
 
             return true;
         }
         else if (itemId == R.id.home) {
             myIntent = new Intent(this, MainActivity.class);
             startActivity(myIntent);
+            overridePendingTransition(0, 0);
+
+            return true;
+
+        } else if (itemId == R.id.mybooking) {
+            return true;
         }
         return false;
     }
