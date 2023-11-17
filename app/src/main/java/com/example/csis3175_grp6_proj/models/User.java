@@ -11,7 +11,7 @@ public class User {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name="userid")
-    private String UserId;
+    private int UserId;
 
     @NonNull
     @ColumnInfo(name="firstname")
@@ -46,11 +46,11 @@ public class User {
     private double Credit;
 
     @NonNull
-    public String getUserId() {
+    public int getUserId() {
         return UserId;
     }
 
-    public void setUserId(@NonNull String userId) {
+    public void setUserId(@NonNull int userId) {
         UserId = userId;
     }
 
@@ -127,7 +127,7 @@ public class User {
     public User() {
     }
 
-    public User(@NonNull String userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum, double credit) {
+    public User(@NonNull int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum, double credit) {
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;
