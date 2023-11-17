@@ -37,12 +37,13 @@
     <string name="txtLoginTitle">Log In</string>
     <string name="txtLoginUsername">E-mail</string>
     <string name="txtLoginPassword">Password</string>
-    <string name="txtLoginNotMember">Not a member yet? Click here to register</string>
+    <string name="txtLoginNotMember">Not a member yet?</string>
+    <string name="txtLoginRegister">Click here to register</string>
     <string name="txtRegisterTitle">Register</string>
     <string name="txtRegisterEmail">Email address</string>
     <string name="txtRegisterFirstN">First name</string>
     <string name="txtRegisterLastN">Last name</string>
-    <string name="txtRegisterDOB">Date of Birth</string>
+    <string name="txtRegisterDOB">Date of Birth (DD-MM-YYYY) </string>
     <string name="txtRegisterPassword">Password</string>
     <string name="txtRegisterConPassword">Confirm password</string>
     <string name="txtRegisterBurnaby">Are you a Burnaby Resident?</string>

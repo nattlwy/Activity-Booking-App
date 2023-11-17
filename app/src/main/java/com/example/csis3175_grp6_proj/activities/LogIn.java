@@ -16,9 +16,9 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        TextView txtViewRegister = findViewById(R.id.txtNotAMember);
+        TextView txtViewClickToRegister = findViewById(R.id.txtViewClickToRegister);
 
-        txtViewRegister.setOnClickListener((View view) -> {
+        txtViewClickToRegister.setOnClickListener((View view) -> {
             startActivity(new Intent(this, RegisterActivity.class));
         });
 

@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -31,9 +31,9 @@
 
     <EditText
         android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtRegisterFirstN"
         android:inputType="text"
@@ -43,9 +43,9 @@
 
     <EditText
         android:id="@+id/txtLastName"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtRegisterLastN"
         android:inputType="text"
@@ -53,45 +53,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
 
-    <TextView
-        android:id="@+id/txtDOB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/txtRegisterDOB"
+    <EditText
+        android:id="@+id/txtDateOfBirth"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/txtRegisterDOB"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLastName" />
 
-    <Button
-        android:id="@+id/btnDOB"
-        style="?android:spinnerStyle"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/txtDateDOB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDOB" />
-
     <EditText
         android:id="@+id/txtPasswordInput"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtLoginPassword"
         android:inputType="text|textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDOB" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDateOfBirth" />
 
     <EditText
         android:id="@+id/txtPasswordConfirm"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtRegisterConPassword"
         android:inputType="text|textPassword"
@@ -101,9 +92,9 @@
 
     <CheckBox
         android:id="@+id/CheckBoxActivePass"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/txtRegisterBActivePass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,9 +102,9 @@
 
     <EditText
         android:id="@+id/txtActivePassNum"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtRegisterBActivePassNum"
         android:inputType="text"
