@@ -21,7 +21,7 @@
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/txtRegisterEmail"
         android:inputType="text|textEmailAddress"
@@ -100,17 +100,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txtPasswordInput" />
 
     <CheckBox
-        android:id="@+id/CheckBoxBurnabyRes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:checked="true"
-        android:text="@string/txtRegisterBurnaby"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPasswordConfirm" />
-
-    <CheckBox
         android:id="@+id/CheckBoxActivePass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,7 +107,7 @@
         android:text="@string/txtRegisterBActivePass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CheckBoxBurnabyRes" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPasswordConfirm" />
 
     <EditText
         android:id="@+id/txtActivePassNum"
