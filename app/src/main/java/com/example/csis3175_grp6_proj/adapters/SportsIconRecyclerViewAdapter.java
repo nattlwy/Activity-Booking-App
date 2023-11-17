@@ -1,4 +1,4 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.adapters;
 
 import android.graphics.Color;
 import android.util.Log;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.csis3175_grp6_proj.R;
+import com.example.csis3175_grp6_proj.models.SportsIcon;
 
 import java.util.List;
 

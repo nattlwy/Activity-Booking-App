@@ -1,12 +1,14 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.csis3175_grp6_proj.R;
+import com.example.csis3175_grp6_proj.models.Booking;
 
 import java.util.List;
 

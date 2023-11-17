@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.csis3175_grp6_proj.Booking;
-import com.example.csis3175_grp6_proj.BookingAdapter;
+import com.example.csis3175_grp6_proj.models.Booking;
+import com.example.csis3175_grp6_proj.adapters.BookingAdapter;
 import com.example.csis3175_grp6_proj.R;
 
 import java.util.ArrayList;

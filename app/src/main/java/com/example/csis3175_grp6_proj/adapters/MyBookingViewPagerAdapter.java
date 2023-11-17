@@ -1,4 +1,4 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

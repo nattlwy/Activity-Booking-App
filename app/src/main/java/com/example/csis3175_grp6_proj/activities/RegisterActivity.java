@@ -1,4 +1,4 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+
+import com.example.csis3175_grp6_proj.R;
 
 import java.util.Calendar;
 

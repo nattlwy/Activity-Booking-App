@@ -5,7 +5,7 @@
     android:id="@+id/txtViewCreditsAmount"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyAccountActivity">
+    tools:context=".activities.MyAccountActivity">
 
     <ScrollView
         android:id="@+id/scrollViewMyAccount"

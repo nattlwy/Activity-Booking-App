@@ -1,22 +1,13 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.csis3175_grp6_proj.R;
 
 public class MainActivity extends AppCompatActivity  {
     public static final String SHARED_PREFS = "shared_prefs";
@@ -31,7 +22,7 @@ public class MainActivity extends AppCompatActivity  {
         sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("USER_ID", null);
         // uncomment the line below can bypass the login for debug
-//        userId = "abc";
+        userId = "abc";
     }
 
     @Override

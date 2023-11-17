@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.csis3175_grp6_proj'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.csis3175_grp6_proj"
@@ -29,6 +29,11 @@ android {
 }
 
 dependencies {
+
+    def room_version = "2.6.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'

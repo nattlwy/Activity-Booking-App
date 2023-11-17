@@ -1,4 +1,4 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.csis3175_grp6_proj.R;
 
 public class LogIn extends AppCompatActivity {
 

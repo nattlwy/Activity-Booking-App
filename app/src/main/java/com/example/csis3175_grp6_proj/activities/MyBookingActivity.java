@@ -1,4 +1,4 @@
-package com.example.csis3175_grp6_proj;
+package com.example.csis3175_grp6_proj.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.example.csis3175_grp6_proj.adapters.MyBookingViewPagerAdapter;
+import com.example.csis3175_grp6_proj.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
