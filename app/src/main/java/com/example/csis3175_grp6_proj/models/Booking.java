@@ -1,5 +1,7 @@
 package com.example.csis3175_grp6_proj.models;
 
+import androidx.room.Entity;
+
 public class Booking {
 
     private String BookingName;
