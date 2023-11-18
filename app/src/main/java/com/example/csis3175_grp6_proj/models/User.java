@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "users")
 public class User {
 
-    @NonNull
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name="userid")
     private int UserId;
 
@@ -127,7 +127,7 @@ public class User {
     public User() {
     }
 
-    public User(@NonNull int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum, double credit) {
+    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum, double credit) {
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;

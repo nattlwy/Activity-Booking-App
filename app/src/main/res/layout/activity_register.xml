@@ -10,9 +10,12 @@
         android:id="@+id/txtRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
+        android:letterSpacing="0.05"
         android:text="@string/txtRegisterTitle"
-        android:textSize="20sp"
+        android:textColor="#3F51B5"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +24,7 @@
         android:id="@+id/txtEmail"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/txtRegisterEmail"
         android:inputType="text|textEmailAddress"
@@ -114,10 +117,11 @@
 
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#4ca1af"
         android:text="@string/txtRegisterTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtActivePassNum" />
