@@ -34,12 +34,12 @@
     <string name="txtBookingConConBooking">Confirm Booking</string>
     <string name="txtBookingConTopic">Topic</string>
     <string name="txtBookingConInfo">Information</string>
-    <string name="txtLoginTitle">Log In</string>
+    <string name="txtLoginTitle">LOGIN</string>
     <string name="txtLoginUsername">E-mail</string>
     <string name="txtLoginPassword">Password</string>
     <string name="txtLoginNotMember">Not a member yet?</string>
     <string name="txtLoginRegister">Click here to register</string>
-    <string name="txtRegisterTitle">Register</string>
+    <string name="txtRegisterTitle">REGISTER</string>
     <string name="txtRegisterEmail">Email address</string>
     <string name="txtRegisterFirstN">First name</string>
     <string name="txtRegisterLastN">Last name</string>
