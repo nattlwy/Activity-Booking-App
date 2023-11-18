@@ -72,7 +72,7 @@ public class LogIn extends AppCompatActivity {
                                 Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                startActivity(new Intent(LogIn.this, MainActivity.class));
+                                startActivity(new Intent(LogIn.this, HomeActivity.class));
                             }
                         });
                     }
