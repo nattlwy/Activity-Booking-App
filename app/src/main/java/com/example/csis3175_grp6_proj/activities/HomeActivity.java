@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.csis3175_grp6_proj.R;
+import com.example.csis3175_grp6_proj.models.Sport;
 import com.example.csis3175_grp6_proj.models.SportsIcon;
 import com.example.csis3175_grp6_proj.adapters.SportsIconRecyclerViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,6 +60,13 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
 
     @Override
     public void onItemClick(int i) {
+        String sportName = SportsIconList.get(i).getImgName();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("sport", sportName);
+        Intent intent = new Intent(HomeActivity.this, SportsBookingActivity2.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
