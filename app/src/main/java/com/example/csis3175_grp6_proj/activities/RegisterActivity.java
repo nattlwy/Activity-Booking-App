@@ -7,6 +7,7 @@ import androidx.room.Room;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,11 +35,7 @@ import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    List<User> UserList = new ArrayList<>();
-
     List<String> BeActivePassNumberList = new ArrayList<>();
-
-
 
     ActivityRegisterBinding binding;
 
@@ -49,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     boolean passNumberValid = false;
 
-    boolean userReady = false;
 
     User newUser;
 
@@ -64,8 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //1.comment below line out if csv is read already in login activity
-        UserList = ReadUsersCSV();
         BeActivePassNumberList = ReadBeActivePassCSV();
 
         appdb = Room.databaseBuilder(getApplicationContext(),
@@ -76,8 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                //2.comment the below line out when it is already inserted in the login activity
-                appdb.userDao().insertUsersFromList(UserList);
 
                 List<User> UsersFromDB = appdb.userDao().GetAllUsers();
                 runOnUiThread(new Runnable() {
@@ -147,12 +139,12 @@ public class RegisterActivity extends AppCompatActivity {
                                                         //can create account
                                                         userIDCounter += 1;
                                                         newUser = new User(userIDCounter, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString(), 0);
-                               //                         appdb.userDao().insertOneUser(newUser);
-                                                        //show successful msg
-                                                        Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
                                                         //changing boolean activepassnumvalid
                                                         passNumberValid = true;
-                                                        userReady = true;
+                                                        //show successful msg
+                                                        Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
+                                                        new InsertUserTask().execute(newUser);
+                                                        Log.d("Register", newUser.getUserId() + " is added.");
                                                         //redirect to log in page
                                                         startActivity(new Intent(RegisterActivity.this, LogIn.class));
 
@@ -173,8 +165,8 @@ public class RegisterActivity extends AppCompatActivity {
                                             //update by 1
                                             userIDCounter += 1;
                                             newUser = new User(userIDCounter, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na", 0);
-                       //                     appdb.userDao().insertOneUser(newUser);
-                                            userReady = true;
+                                            new InsertUserTask().execute(newUser);
+                                            Log.d("Register", newUser.getUserId() + " is added.");
                                             Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(RegisterActivity.this, LogIn.class));
 
@@ -202,63 +194,12 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
 
-                if (userReady) {
-
-                    appdb.userDao().insertOneUser(newUser);
-
-                }
-
-
-
-
-
-
             }
         });
 
 
     }
 
-
-
-    //3.comment below out when this reading CSV is already done in the log in page
-    private List<User> ReadUsersCSV() {
-
-        List<User> Users = new ArrayList<>();
-        InputStream inputStream = getResources()
-                .openRawResource(R.raw.users);
-        BufferedReader reader
-                = new BufferedReader(new InputStreamReader(inputStream));
-        String userLine;
-
-        try {
-            if ((userLine = reader.readLine()) != null){
-                //process header
-            }
-            while((userLine = reader.readLine()) != null){
-                String[] eachUserFields = userLine.split(",");
-                User eachUser =
-                        new User(Integer.parseInt(eachUserFields[0]),
-                                eachUserFields[1], eachUserFields[2], eachUserFields[3],
-                                eachUserFields[4], eachUserFields[5], Boolean.parseBoolean(eachUserFields[6]),
-                                eachUserFields[7], Double.parseDouble(eachUserFields[8]));
-                Users.add(eachUser);
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally{
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return Users;
-
-
-    }
 
     private List<String> ReadBeActivePassCSV() {
         List<String> BeActivePassNumbers = new ArrayList<>();
@@ -288,6 +229,22 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return BeActivePassNumbers;
+    }
+
+    private class InsertUserTask extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            // Perform background database operation (e.g., insert user)
+            appdb.userDao().insertOneUser(users[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            // Update UI or perform additional UI-related actions
+            Log.d("Register", "User inserted successfully");
+        }
     }
 
 }
