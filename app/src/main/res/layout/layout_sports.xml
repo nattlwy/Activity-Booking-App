@@ -10,14 +10,15 @@
         android:id="@+id/sportsIcon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.5"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/sportsIconName"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight=".5"
         android:text="SportName"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="16sp" />
 </LinearLayout>

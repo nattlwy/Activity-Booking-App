@@ -54,5 +54,5 @@
     <string name="txtUpcoming">Upcoming</string>
     <string name="txtHistory">History</string>
     <string name="txtCancelled">Cancelled</string>
-
+    <string name="txtBackButton">&lt; Back</string>
 </resources>
