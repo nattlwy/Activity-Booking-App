@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity  {
 
         sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("USER_ID", null);
-        // uncomment the line below can bypass the login for debug
-        userId = "abc";
+//        // uncomment the line below can bypass the login for debug
+//        userId = "abc";
     }
 
     @Override
