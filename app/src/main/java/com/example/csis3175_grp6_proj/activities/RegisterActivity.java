@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     User newUser;
 
-    int userIDCounter = 1002;
+    int lastUserId;
 
 
 
@@ -72,6 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void run() {
 
                 List<User> UsersFromDB = appdb.userDao().GetAllUsers();
+                Log.d("Register", UsersFromDB.size() + " users in db");
+
+                lastUserId = appdb.userDao().getLastInsertedUser().getUserId();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -137,8 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 for (String passNumber:BeActivePassNumberList) {
                                                     if(binding.txtActivePassNum.getText().toString().equals(passNumber)) {
                                                         //can create account
-                                                        userIDCounter += 1;
-                                                        newUser = new User(userIDCounter, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString(), 0);
+                                                        newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString(), 0);
                                                         //changing boolean activepassnumvalid
                                                         passNumberValid = true;
                                                         //show successful msg
@@ -162,9 +164,8 @@ public class RegisterActivity extends AppCompatActivity {
                                         } else {
                                             //no activepass user adding to database
 
-                                            //update by 1
-                                            userIDCounter += 1;
-                                            newUser = new User(userIDCounter, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na", 0);
+                                            //user id update by 1
+                                            newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na", 0);
                                             new InsertUserTask().execute(newUser);
                                             Log.d("Register", newUser.getUserId() + " is added.");
                                             Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
