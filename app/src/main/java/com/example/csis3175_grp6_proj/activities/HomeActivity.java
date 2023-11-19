@@ -13,6 +13,11 @@ import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.models.Sport;
 import com.example.csis3175_grp6_proj.models.SportsIcon;
 import com.example.csis3175_grp6_proj.adapters.SportsIconRecyclerViewAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -38,6 +43,17 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
         GridLayoutManager gm = new GridLayoutManager(HomeActivity.this, 3);
         recyclerViewIcons.setAdapter(adapter);
         recyclerViewIcons.setLayoutManager(gm);
+
+        // Ads banner
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+
+            }
+        });
+        AdView adViewHome = findViewById(R.id.adViewHome);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adViewHome.loadAd(adRequest);
 
         // Populate Bottom Nav Bar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

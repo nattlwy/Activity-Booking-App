@@ -11,6 +11,10 @@
         android:theme="@style/Theme.Csis3175grp6proj"
         android:icon="@mipmap/ic_launcher_main_round"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8381280263804128~9685353139"
+            />
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false" />
