@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity  {
     public static final String SHARED_PREFS = "shared_prefs";
 
     SharedPreferences sharedPreferences;
-    String userId, password;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

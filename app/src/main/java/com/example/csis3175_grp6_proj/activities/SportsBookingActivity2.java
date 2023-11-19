@@ -1,11 +1,13 @@
 package com.example.csis3175_grp6_proj.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.example.csis3175_grp6_proj.R;
@@ -35,6 +37,18 @@ public class SportsBookingActivity2 extends AppCompatActivity {
             4.2 bundle data and start new activity
 
          */
+
+        // calendar
+        CalendarView calendar = findViewById(R.id.calendar);
+        calendar.setMinDate(System.currentTimeMillis());
+        calendar.setMaxDate(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                String date = dayOfMonth + "-" + (month + 1) + "-" + year;
+                Log.d("icyfung", date);
+            }
+        });
 
         // back button
         Button backBtn = findViewById(R.id.btnBackSportBooking);
