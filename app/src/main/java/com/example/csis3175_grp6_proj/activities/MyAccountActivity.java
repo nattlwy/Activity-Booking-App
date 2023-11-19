@@ -3,7 +3,9 @@ package com.example.csis3175_grp6_proj.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,8 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
     BottomNavigationView bottomNavigationView;
 
     Button btnLogOut;
+    public static final String SHARED_PREFS = "shared_prefs";
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,9 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
         btnLogOut.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // destroy shared preference data
+                sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                sharedPreferences.edit().remove("USER_ID").apply();
                 startActivity(new Intent(MyAccountActivity.this, LogIn.class));
 
             }

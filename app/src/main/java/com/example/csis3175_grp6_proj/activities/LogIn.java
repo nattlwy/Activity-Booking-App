@@ -3,7 +3,9 @@ package com.example.csis3175_grp6_proj.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +30,8 @@ import java.util.concurrent.Executors;
 public class LogIn extends AppCompatActivity {
     List<User> UserList = new ArrayList<>();
     LeisureLinkDatabase lldb;
-
+    public static final String SHARED_PREFS = "shared_prefs";
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,9 @@ public class LogIn extends AppCompatActivity {
                                 Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                // put curr user id to shared preference for single login
+                                sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putString("USER_ID", String.valueOf(user.getUserId())).apply();
                                 startActivity(new Intent(LogIn.this, HomeActivity.class));
                             }
                         });

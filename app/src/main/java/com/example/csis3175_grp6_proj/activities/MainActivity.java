@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.csis3175_grp6_proj.R;
 
@@ -21,8 +22,9 @@ public class MainActivity extends AppCompatActivity  {
 
         sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("USER_ID", null);
+        Log.d("icyfung", userId + "");
 //      uncomment the line below can bypass the login for debug
-      userId = "abc";
+//      userId = "abc";
     }
 
     @Override
