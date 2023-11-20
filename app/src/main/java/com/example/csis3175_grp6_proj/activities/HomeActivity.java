@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.csis3175_grp6_proj.R;
+import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
 import com.example.csis3175_grp6_proj.models.Sport;
 import com.example.csis3175_grp6_proj.models.SportsIcon;
 import com.example.csis3175_grp6_proj.adapters.SportsIconRecyclerViewAdapter;
@@ -23,17 +26,21 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeActivity extends AppCompatActivity implements SportsIconRecyclerViewAdapter.OnItemClickListener, NavigationBarView.OnItemSelectedListener {
     List<SportsIcon> SportsIconList = new ArrayList<>();
     BottomNavigationView bottomNavigationView;
+    LeisureLinkDatabase lldb;
+    List<Sport> SportsList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         // Populate Sports Grid Layout
-        AddData();
+        LoadSportsDataFromRoomDB();
         RecyclerView recyclerViewIcons = findViewById(R.id.recyclerViewSportsImgHome);
         SportsIconRecyclerViewAdapter adapter =  new SportsIconRecyclerViewAdapter(
                 SportsIconList,
@@ -62,16 +69,37 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
 
     }
 
-    public void AddData() {
-        SportsIconList.add(
-                new SportsIcon(101, "Basketball", R.drawable.basketball)
-        );
-        SportsIconList.add(
-                new SportsIcon(102, "Badminton", R.drawable.badminton)
-        );
-        SportsIconList.add(
-                new SportsIcon(103, "Table Tennis", R.drawable.table_tennis)
-        );
+    public void LoadSportsDataFromRoomDB() {
+        lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                SportsList = lldb.sportDao().GetAllSports();
+                for (Sport sport : SportsList) {
+                    String sportImageName = sport.getSportName().toLowerCase().replace(" ", "_");
+                    Log.d("icyfung", sportImageName);
+                    SportsIconList.add(
+                            new SportsIcon(
+                                    Integer.parseInt(sport.getSportId()),
+                                    sport.getSportName(),
+                                    getResources().getIdentifier(sportImageName, "drawable", getPackageName())
+                            )
+                    );
+                }
+            }
+        });
+
+//
+//        SportsIconList.add(
+//                new SportsIcon(101, "Basketball", R.drawable.basketball)
+//        );
+//        SportsIconList.add(
+//                new SportsIcon(102, "Badminton", R.drawable.badminton)
+//        );
+//        SportsIconList.add(
+//                new SportsIcon(103, "Table Tennis", R.drawable.table_tennis)
+//        );
     }
 
     @Override
