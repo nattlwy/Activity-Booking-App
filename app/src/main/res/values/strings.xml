@@ -3,7 +3,7 @@
     <string name="mainPageAds">Ads</string>
     <string name="imgSplashDescription">Splash Screen</string>
     <string name="txtUserName">Jamie Lee</string>
-    <string name="txtUserEmail">Email</string>
+    <string name="txtUserEmail">Email:</string>
     <string name="txtBirthday">Birthday:</string>
     <string name="txtBirthdayInfo">1992-08-09</string>
     <string name="txtBeActivePass">Be Active Pass Holder:</string>
@@ -58,4 +58,5 @@
     <string name="cancelBookingDialogMsg">Cancel this booking?</string>
     <string name="cancelBookingDialogYesBtnTxt">Yes</string>
     <string name="cancelBookingDialogNoBtnTxt">No</string>
+    <string name="txtEmailAddress">xxx@gmail.com</string>
 </resources>

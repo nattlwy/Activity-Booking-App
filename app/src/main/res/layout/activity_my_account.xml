@@ -39,7 +39,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintVertical_bias="1.0">
 
                     <ImageView
                         android:id="@+id/imgViewProfileIcon"
@@ -61,21 +61,15 @@
                         android:id="@+id/txtViewUsername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
+                        android:letterSpacing="0.1"
                         android:text="@string/txtUserName"
+                        android:textColor="#3F51B5"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgViewProfileIcon" />
-
-                    <TextView
-                        android:id="@+id/txtViewEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/txtUserEmail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtViewUsername" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,7 +83,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="360dp"
         android:text="@string/txtBirthday"
         android:textColor="#3F51B5"
         android:textSize="18sp"
@@ -97,10 +91,34 @@
         app:layout_constraintTop_toTopOf="@+id/scrollViewMyAccount" />
 
     <TextView
-        android:id="@+id/txtViewBirthdayInfo"
+        android:id="@+id/txtViewEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="300dp"
+        android:text="@string/txtUserEmail"
+        android:textColor="#3F51B5"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollViewMyAccount" />
+
+    <TextView
+        android:id="@+id/txtViewEmailInfo"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/txtEmailAddress"
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtViewBirthdayInfo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
         android:layout_marginEnd="32dp"
         android:text="@string/txtBirthdayInfo"
         android:textAlignment="viewEnd"
@@ -159,40 +177,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewBeActivePassYesOrNo" />
 
-    <TextView
-        android:id="@+id/txtViewCredits"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/txtCredits"
-        android:textColor="#3F51B5"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewBeActivePassNumber" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/txtCreditsAmount"
-        android:textAlignment="viewEnd"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewPassNumber" />
-
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="34dp"
         android:backgroundTint="#4ca1af"
         android:text="@string/txtBtnLogOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewCredits" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewBeActivePassNumber" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
