@@ -34,6 +34,9 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
     BottomNavigationView bottomNavigationView;
     LeisureLinkDatabase lldb;
     List<Sport> SportsList = new ArrayList<>();
+    RecyclerView recyclerViewIcons;
+    SportsIconRecyclerViewAdapter adapter;
+    GridLayoutManager gm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +44,6 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
 
         // Populate Sports Grid Layout
         LoadSportsDataFromRoomDB();
-        RecyclerView recyclerViewIcons = findViewById(R.id.recyclerViewSportsImgHome);
-        SportsIconRecyclerViewAdapter adapter =  new SportsIconRecyclerViewAdapter(
-                SportsIconList,
-                HomeActivity.this
-        );
-
-        GridLayoutManager gm = new GridLayoutManager(HomeActivity.this, 3);
-        recyclerViewIcons.setAdapter(adapter);
-        recyclerViewIcons.setLayoutManager(gm);
 
         // Ads banner
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -87,6 +81,14 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
                             )
                     );
                 }
+                RecyclerView recyclerViewIcons = findViewById(R.id.recyclerViewSportsImgHome);
+                GridLayoutManager gm = new GridLayoutManager(HomeActivity.this, 3);
+                adapter =  new SportsIconRecyclerViewAdapter(
+                        SportsIconList,
+                        HomeActivity.this
+                );
+                recyclerViewIcons.setAdapter(adapter);
+                recyclerViewIcons.setLayoutManager(gm);
             }
         });
 
