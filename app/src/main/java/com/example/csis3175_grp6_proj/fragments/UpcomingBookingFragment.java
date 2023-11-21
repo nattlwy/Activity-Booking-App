@@ -1,14 +1,18 @@
 package com.example.csis3175_grp6_proj.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.csis3175_grp6_proj.activities.BookingReviewActivity;
 import com.example.csis3175_grp6_proj.models.Booking;
 import com.example.csis3175_grp6_proj.adapters.BookingAdapter;
 import com.example.csis3175_grp6_proj.R;
@@ -50,6 +54,15 @@ public class UpcomingBookingFragment extends Fragment {
         BookingAdapter myAdapter = new BookingAdapter(UpcomingBookingList);
         // Set the adapter for the ListView
         lstViewBooking.setAdapter(myAdapter);
+        // Route to booking review activity on click
+        lstViewBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("icyfung", String.valueOf(i));
+                Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

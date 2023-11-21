@@ -55,4 +55,7 @@
     <string name="txtHistory">History</string>
     <string name="txtCancelled">Cancelled</string>
     <string name="txtBackButton">&lt; Back</string>
+    <string name="cancelBookingDialogMsg">Cancel this booking?</string>
+    <string name="cancelBookingDialogYesBtnTxt">Yes</string>
+    <string name="cancelBookingDialogNoBtnTxt">No</string>
 </resources>
