@@ -113,8 +113,7 @@ public class LogIn extends AppCompatActivity {
                 if (eachUserFields[6].equals("true")) {
                     beActivePassYesorNo = true;
                 }
-                Double credit = Double.parseDouble(eachUserFields[8]);
-                User eachUser = new User(userId,eachUserFields[1], eachUserFields[2], eachUserFields[3],eachUserFields[4], eachUserFields[5], beActivePassYesorNo, eachUserFields[7], credit);
+                User eachUser = new User(userId,eachUserFields[1], eachUserFields[2], eachUserFields[3],eachUserFields[4], eachUserFields[5], beActivePassYesorNo, eachUserFields[7]);
                 Users.add(eachUser);
             }
         } catch (IOException e) {

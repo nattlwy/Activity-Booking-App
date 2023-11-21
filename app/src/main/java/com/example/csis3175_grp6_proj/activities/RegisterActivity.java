@@ -140,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 for (String passNumber:BeActivePassNumberList) {
                                                     if(binding.txtActivePassNum.getText().toString().equals(passNumber)) {
                                                         //can create account
-                                                        newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString(), 0);
+                                                        newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString());
                                                         //changing boolean activepassnumvalid
                                                         passNumberValid = true;
                                                         //show successful msg
@@ -165,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             //no activepass user adding to database
 
                                             //user id update by 1
-                                            newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na", 0);
+                                            newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na");
                                             new InsertUserTask().execute(newUser);
                                             Log.d("Register", newUser.getUserId() + " is added.");
                                             Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();

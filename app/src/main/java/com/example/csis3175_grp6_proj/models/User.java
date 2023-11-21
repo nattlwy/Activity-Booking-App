@@ -42,10 +42,6 @@ public class User {
     private String BeActivePassNum;
 
     @NonNull
-    @ColumnInfo(name="credit")
-    private double Credit;
-
-    @NonNull
     public int getUserId() {
         return UserId;
     }
@@ -116,18 +112,11 @@ public class User {
         BeActivePassNum = beActivePassNum;
     }
 
-    public double getCredit() {
-        return Credit;
-    }
-
-    public void setCredit(double credit) {
-        Credit = credit;
-    }
 
     public User() {
     }
 
-    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum, double credit) {
+    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String birthday, boolean beActivePassHolder, @NonNull String beActivePassNum) {
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;
@@ -136,6 +125,5 @@ public class User {
         Birthday = birthday;
         BeActivePassHolder = beActivePassHolder;
         BeActivePassNum = beActivePassNum;
-        Credit = credit;
     }
 }

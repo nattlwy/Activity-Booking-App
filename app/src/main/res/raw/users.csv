@@ -1,3 +1,3 @@
-UserID,FirstName,LastName,Email,Password,Birthday,BeActivePassHolder,BeActivePassNum,Credit
-1001,John,Smith,johnsmith@gmail.com,abc123,15-01-1999,true,a1234567,0
-1002,James,Bond,jamesbond089@gmail.com,def456,09-08-1950,false,,0
+﻿UserID,FirstName,LastName,Email,Password,Birthday,BeActivePassHolder,BeActivePassNum
+1001,John,Smith,johnsmith@gmail.com,abc123,15/1/1999,TRUE,a1234567
+1002,James,Bond,jamesbond089@gmail.com,def456,9/8/1950,FALSE,na
