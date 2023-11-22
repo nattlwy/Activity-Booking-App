@@ -1,10 +1,10 @@
-﻿SportID,SportName,Facility
-9001,Table Tennis,Multi-purpose Room 
-9002,Badminton,Badminton Court
-9003,Basketball,Basketball Court
-9004,Group Fitness,Hall
-9005,Volley Ball,Volleyball Court
-9006,Indoor Cycling,Cycling Studio
-9007,Soccer,Soccer Field
-9008,Hockey,Hockey Pitch
-9009,Yoga,Yoga/Pilates Studio
+﻿SportID,SportName,Facility,Capacity
+9001,Table Tennis,Multi-purpose Room ,4
+9002,Badminton,Badminton Court,2
+9003,Basketball,Basketball Court,2
+9004,Group Fitness,Hall,20
+9005,Volley Ball,Volleyball Court,2
+9006,Indoor Cycling,Cycling Studio,15
+9007,Soccer,Soccer Field,2
+9008,Hockey,Hockey Pitch,1
+9009,Yoga,Yoga/Pilates Studio,20

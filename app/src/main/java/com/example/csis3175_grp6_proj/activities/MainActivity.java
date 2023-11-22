@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity  {
             if ((sportLine = reader.readLine()) != null) {  }
             while ((sportLine = reader.readLine()) != null) {
                 String[] eachSportLine = sportLine.split(",");
-                Sport eachSport = new Sport(eachSportLine[0], eachSportLine[1], eachSportLine[2]);
+                int sportCapacity = Integer.parseInt(eachSportLine[3]);
+                Sport eachSport = new Sport(eachSportLine[0], eachSportLine[1], eachSportLine[2], sportCapacity);
                 Sports.add(eachSport);
             }
         } catch (IOException e) {

@@ -22,6 +22,10 @@ public class Sport {
     private String Facility;
 
     @NonNull
+    @ColumnInfo(name = "capacity")
+    private int Capacity;
+
+    @NonNull
     public String getSportId() {
         return SportId;
     }
@@ -48,12 +52,21 @@ public class Sport {
         Facility = facility;
     }
 
+    public int getCapacity() {
+        return Capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        Capacity = capacity;
+    }
+
     public Sport() {
     }
 
-    public Sport(@NonNull String sportId, @NonNull String sportName, @NonNull String facility) {
+    public Sport(@NonNull String sportId, @NonNull String sportName, @NonNull String facility, int capacity) {
         SportId = sportId;
         SportName = sportName;
         Facility = facility;
+        Capacity = capacity;
     }
 }
