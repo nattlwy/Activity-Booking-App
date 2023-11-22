@@ -59,4 +59,6 @@
     <string name="cancelBookingDialogYesBtnTxt">Yes</string>
     <string name="cancelBookingDialogNoBtnTxt">No</string>
     <string name="txtEmailAddress">xxx@gmail.com</string>
+    <string name="txtModeOfPayment">Payment Mode</string>
+    <string name="txtModeOfPaymentInfo">CAD $3.99 Pay At Venue</string>
 </resources>

@@ -92,7 +92,7 @@
 
     <TextView
         android:id="@+id/txtViewEmail"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="300dp"
@@ -104,7 +104,7 @@
 
     <TextView
         android:id="@+id/txtViewEmailInfo"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
         android:layout_marginEnd="32dp"
