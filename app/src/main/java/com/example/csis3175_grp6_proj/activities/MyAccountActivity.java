@@ -57,7 +57,7 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
         txtViewBeActivePassHolder = findViewById(R.id.txtViewBeActivePassYesOrNo);
         txtViewEmailInfo = findViewById(R.id.txtViewEmailInfo);
         txtViewFullName = findViewById(R.id.txtViewUsername);
-        txtViewPassNumInfo = findViewById(R.id.txtViewBeActivePassNumber);
+        txtViewPassNumInfo = findViewById(R.id.txtViewPassNumberInfo);
 
         appdb = Room.databaseBuilder(getApplicationContext(),
                 LeisureLinkDatabase.class,"leisurelink.db").build();
@@ -70,6 +70,33 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
             public void run() {
                 List<User> UsersFromDB = appdb.userDao().GetAllUsers();
                 Log.d("myaccount", UsersFromDB.size() + " users in db");
+
+                User currUser = appdb.userDao().getUserByUserId(Integer.parseInt(userId));
+
+                String currUserFullName = currUser.getFirstName() + " " + currUser.getLastName();
+                String currUserEmail = currUser.getEmail();
+                Boolean currUserPassHolderTrueOrFalse = currUser.isBeActivePassHolder();
+                String currUserPassHolderYesOrNo;
+                if (currUserPassHolderTrueOrFalse) {
+                    currUserPassHolderYesOrNo = "Yes";
+                } else {
+                    currUserPassHolderYesOrNo = "No";
+                }
+                String currUserPassHolderNumber = currUser.getBeActivePassNum();
+
+                Log.d("myaccount", currUserFullName + " ");
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtViewFullName.setText(currUserFullName);
+                        txtViewEmailInfo.setText(currUserEmail);
+                        txtViewBeActivePassHolder.setText(currUserPassHolderYesOrNo);
+                        txtViewPassNumInfo.setText(currUserPassHolderNumber);
+                    }
+                });
+
+
             }
         });
 

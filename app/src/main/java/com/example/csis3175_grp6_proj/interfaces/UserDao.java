@@ -29,4 +29,7 @@ public interface UserDao {
     @Query("SELECT * FROM users ORDER BY UserId DESC LIMIT 1")
     User getLastInsertedUser();
 
+    @Query("SELECT * FROM users WHERE UserId = :userid")
+    User getUserByUserId(int userid);
+
 }
