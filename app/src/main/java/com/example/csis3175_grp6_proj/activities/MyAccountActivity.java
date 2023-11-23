@@ -39,7 +39,7 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
 
     Button btnLogOut;
 
-    LeisureLinkDatabase appdb;
+    LeisureLinkDatabase lldb;
     public static final String SHARED_PREFS = "shared_prefs";
     SharedPreferences sharedPreferences;
 
@@ -59,7 +59,7 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
         txtViewFullName = findViewById(R.id.txtViewUsername);
         txtViewPassNumInfo = findViewById(R.id.txtViewPassNumberInfo);
 
-        appdb = Room.databaseBuilder(getApplicationContext(),
+        lldb = Room.databaseBuilder(getApplicationContext(),
                 LeisureLinkDatabase.class,"leisurelink.db").build();
 
         ExecutorService executorService
@@ -68,10 +68,10 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                List<User> UsersFromDB = appdb.userDao().GetAllUsers();
+                List<User> UsersFromDB = lldb.userDao().GetAllUsers();
                 Log.d("myaccount", UsersFromDB.size() + " users in db");
 
-                User currUser = appdb.userDao().getUserByUserId(Integer.parseInt(userId));
+                User currUser = lldb.userDao().getUserByUserId(Integer.parseInt(userId));
 
                 String currUserFullName = currUser.getFirstName() + " " + currUser.getLastName();
                 String currUserEmail = currUser.getEmail();

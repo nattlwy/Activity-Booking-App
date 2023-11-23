@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
+import com.example.csis3175_grp6_proj.models.Booking;
 import com.example.csis3175_grp6_proj.models.Sport;
 import com.example.csis3175_grp6_proj.models.TimeSlot;
 import com.example.csis3175_grp6_proj.models.User;
@@ -21,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity  {
     List<Sport> Sports = new ArrayList<>();
     List<Venue> Venues = new ArrayList<>();
     List<TimeSlot> TimeSlots = new ArrayList<>();
+
+    List<Booking> Bookings = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity  {
         Sports = ReadSportsCSV();
         Venues = ReadVenuesCSV();
         TimeSlots = ReadTimeSlotsCSV();
+        Bookings = ReadBookingsCSV();
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity  {
                 lldb.sportDao().insertSportsFromList(Sports);
                 lldb.venueDao().insertVenuesFromList(Venues);
                 lldb.timeSlotDao().insertTimeSlotsFromList(TimeSlots);
+                lldb.bookingDao().insertBookingsFromList(Bookings);
             }
 
         });
@@ -155,6 +161,31 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
         return TimeSlots;
+    }
+
+    private List<Booking> ReadBookingsCSV() {
+        List<Booking> Bookings = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(R.raw.bookings);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String bookingLine;
+
+        try {
+            if ((bookingLine = reader.readLine()) != null) {  }
+            while ((bookingLine = reader.readLine()) != null) {
+                String[] eachBookingLine = bookingLine.split(",");
+                Booking eachBooking = new Booking(Integer.parseInt(eachBookingLine[0]), Integer.parseInt(eachBookingLine[1]), eachBookingLine[2], eachBookingLine[3], eachBookingLine[4], eachBookingLine[5], eachBookingLine[6], Long.parseLong(eachBookingLine[7]));
+                Bookings.add(eachBooking);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally{
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return Bookings;
     }
 
 

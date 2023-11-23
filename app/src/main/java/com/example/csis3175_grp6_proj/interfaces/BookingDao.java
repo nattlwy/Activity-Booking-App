@@ -24,9 +24,16 @@ public interface BookingDao {
     @Query("SELECT * FROM bookings")
     List<Booking> GetAllBookings();
 
+
     //add query to find booking with status = Upcoming and :userId
     //add query to find booking with status = History and :userId
     //add query to find booking with status = Cancelled and :userId
+    //show activity date
+    //add query to find sport name with inner join sport table and booking table
+    //add query to find facility name with inner join sport table and booking table
+    //add query to find venue name with inner join venue table and booking table
+    //add query to find timeslot day of week with inner join timeslot table
+    //add query to find timeslot hour with inner join timeslot table
 
 
 }

@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
 
-    LeisureLinkDatabase appdb;
+    LeisureLinkDatabase lldb;
 
     boolean passwordValid = true;
     boolean emailValid = true;
@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         BeActivePassNumberList = ReadBeActivePassCSV();
 
-        appdb = Room.databaseBuilder(getApplicationContext(),
+        lldb = Room.databaseBuilder(getApplicationContext(),
                 LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService
                 = Executors.newSingleThreadExecutor();
@@ -71,10 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                List<User> UsersFromDB = appdb.userDao().GetAllUsers();
+                List<User> UsersFromDB = lldb.userDao().GetAllUsers();
                 Log.d("Register", UsersFromDB.size() + " users in db");
 
-                lastUserId = appdb.userDao().getLastInsertedUser().getUserId();
+                lastUserId = lldb.userDao().getLastInsertedUser().getUserId();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -236,7 +236,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(User... users) {
             // Perform background database operation (e.g., insert user)
-            appdb.userDao().insertOneUser(users[0]);
+            lldb.userDao().insertOneUser(users[0]);
             return null;
         }
 
