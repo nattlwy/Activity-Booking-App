@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +28,10 @@ public class MyBookingActivity extends AppCompatActivity implements NavigationBa
     BottomNavigationView bottomNavigationView;
 
     FrameLayout frameLayout;
+
+    public static final String SHARED_PREFS = "shared_prefs";
+    SharedPreferences sharedPreferences;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,10 @@ public class MyBookingActivity extends AppCompatActivity implements NavigationBa
         bottomNavigationView.setSelectedItemId(R.id.mybooking);
         bottomNavigationView.setOnItemSelectedListener(this);
         frameLayout = findViewById(R.id.frameLayoutMyBooking);
+
+        sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("USER_ID", null);
+        Log.d("upcomingbooking", userId + "");
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

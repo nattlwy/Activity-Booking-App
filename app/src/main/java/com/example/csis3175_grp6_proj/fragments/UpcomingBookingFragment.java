@@ -1,6 +1,8 @@
 package com.example.csis3175_grp6_proj.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,11 @@ import java.util.List;
 
 public class UpcomingBookingFragment extends Fragment {
 
+    public static final String SHARED_PREFS = "shared_prefs";
+    SharedPreferences sharedPreferences;
+    String userId;
+
+
     List<Booking> UpcomingBookingList = new ArrayList<>();
     List<String> BookingNames = new ArrayList<>
             (Arrays.asList("Table Tennis", "Badminton","Basketball"));
@@ -43,9 +50,14 @@ public class UpcomingBookingFragment extends Fragment {
 
         //LoadMoreData();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
 
         //View view = inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
+
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("USER_ID", null);
+        Log.d("mybooking", userId + "");
 
         // Find the ListView by its ID
         //ListView lstViewBooking = view.findViewById(R.id.lstViewBooking);
@@ -64,7 +76,7 @@ public class UpcomingBookingFragment extends Fragment {
 //            }
 //        });
 //
-//        return view;
+       return view;
     }
 
 //    private void LoadMoreData() {
