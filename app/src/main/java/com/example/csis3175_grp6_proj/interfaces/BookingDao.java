@@ -37,6 +37,9 @@ public interface BookingDao {
     @Query("SELECT * FROM bookings WHERE userId = :userId AND status = 'Cancelled'")
     List<Booking> GetCancelledBookings(String userId);
 
+    @Query("SELECT * FROM bookings WHERE bookingid = :bookingId")
+    Booking GetOneBookingByBookingId(int bookingId);
+
 
 
     //add query to find sport name with inner join sport table and booking table

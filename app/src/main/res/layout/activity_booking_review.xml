@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingDateInfo" />
 
     <TextView
-        android:id="@+id/txtViewReviewBookingCenterInfo"
+        android:id="@+id/txtViewReviewBookingFacilityInfo"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -101,10 +101,10 @@
         android:textAlignment="viewEnd"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingFacilityInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingCenterInfo" />
 
     <TextView
-        android:id="@+id/txtViewReviewBookingFacilityInfo"
+        android:id="@+id/txtViewReviewBookingCenterInfo"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -138,7 +138,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingLocation" />
 
     <TextView
-        android:id="@+id/txtModeOfPaymentInfo"
+        android:id="@+id/txtViewModeOfPaymentInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -146,7 +146,7 @@
         android:text="@string/txtModeOfPaymentInfo"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingCenterInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewReviewBookingFacilityInfo" />
 
     <ImageView
         android:id="@+id/imgViewBookingDate"
