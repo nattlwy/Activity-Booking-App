@@ -36,14 +36,39 @@ public interface BookingDao {
     //add query to find booking with status = Cancelled and :userId
     @Query("SELECT * FROM bookings WHERE userId = :userId AND status = 'Cancelled'")
     List<Booking> GetCancelledBookings(String userId);
-    //show activity date
+
 
 
     //add query to find sport name with inner join sport table and booking table
+
+    @Query("SELECT sportname FROM bookings JOIN sports ON bookings.sportid = sports.sportid WHERE bookings.bookingid = :bookingId")
+    String GetSportName(int bookingId);
+
+
     //add query to find facility name with inner join sport table and booking table
+    @Query("SELECT facility FROM bookings JOIN sports ON bookings.sportid = sports.sportid WHERE bookings.bookingid = :bookingId")
+    String GetFacility(int bookingId);
+
     //add query to find venue name with inner join venue table and booking table
+    @Query("SELECT venuename FROM bookings JOIN venues ON bookings.venueid = venues.venueid WHERE bookings.bookingid = :bookingId")
+    String GetVenueName(int bookingId);
+
     //add query to find timeslot day of week with inner join timeslot table
+    @Query("SELECT dayofweek FROM bookings JOIN timeslots ON bookings.timeslotid = timeslots.timeslotid WHERE bookings.bookingid = :bookingId")
+    int GetDayOfWeek(int bookingId);
     //add query to find timeslot hour with inner join timeslot table
+    @Query("SELECT hour FROM bookings JOIN timeslots ON bookings.timeslotid = timeslots.timeslotid WHERE bookings.bookingid = :bookingId")
+    int GetHour(int bookingId);
+
+    //add query to show mode of payment
+    @Query("SELECT beactivepassholder FROM bookings JOIN users ON bookings.userid = users.userid WHERE bookings.bookingid = :bookingId")
+    boolean GetUserPassStatus(int bookingId);
+
+    //show activity date
+    //show venue id
+
+
+
 
 
 }
