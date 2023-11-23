@@ -2,6 +2,7 @@ package com.example.csis3175_grp6_proj.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,15 +44,22 @@ public class MainActivity extends AppCompatActivity  {
         userId = sharedPreferences.getString("USER_ID", null);
         Log.d("icyfung", userId + "");
 
-       Sports = ReadSportsCSV();
+        Sports = ReadSportsCSV();
+        Venues = ReadVenuesCSV();
+        TimeSlots = ReadTimeSlotsCSV();
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
                 lldb.sportDao().insertSportsFromList(Sports);
+                lldb.venueDao().insertVenuesFromList(Venues);
+                lldb.timeSlotDao().insertTimeSlotsFromList(TimeSlots);
             }
+
         });
+
+
 
 //      uncomment the line below can bypass the login for debug
 //      userId = "abc";
