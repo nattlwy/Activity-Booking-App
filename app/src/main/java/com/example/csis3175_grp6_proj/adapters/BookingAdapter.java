@@ -13,6 +13,7 @@ import androidx.room.Room;
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
 import com.example.csis3175_grp6_proj.models.Booking;
+import com.example.csis3175_grp6_proj.models.SportsIcon;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -68,6 +69,7 @@ public class BookingAdapter extends BaseAdapter {
                 @Override
             public void run() {
                 String sportName = lldb.bookingDao().GetSportName(bookingId);
+                String sportImageName = sportName.toLowerCase().replace(" ", "_");
                 Log.d("bookingadpater", sportName);
                 String facilityName = lldb.bookingDao().GetFacility(bookingId);
                 int dayOfWeek = lldb.bookingDao().GetDayOfWeek(bookingId);
@@ -102,17 +104,12 @@ public class BookingAdapter extends BaseAdapter {
                         txtViewBookingName.setText(sportName);
                         txtViewBookingVenueName.setText(venueId + "  " + facilityName);
                         txtViewBookingDateAndTime.setText(adapterBookings.get(i).getActivityDate() + "    " + engDayOfWeek + "    " + duration);
+                        imgViewBookingLogo.setImageResource(viewGroup.getContext().getResources().getIdentifier(sportImageName, "drawable", viewGroup.getContext().getPackageName()));
                     }
                 });
             }
     });
 
-
-          //txtViewBookingName.setText(sportName);
-//        txtViewBookingVenueName.setText(adapterBookings.get(i).getBookingFacility());
-//        txtViewBookingDateAndTime.setText(adapterBookings.get(i).getBookingDate() + " " + adapterBookings.get(i).getBookingTime());
-//
-//        imgViewBookingLogo.setImageResource(adapterBookings.get(i).getBookingActivityPic());
 
         return view;
     }

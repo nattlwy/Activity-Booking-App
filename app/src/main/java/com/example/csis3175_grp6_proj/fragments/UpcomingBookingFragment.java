@@ -40,24 +40,12 @@ public class UpcomingBookingFragment extends Fragment {
     ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     List<Booking> UpcomingBookingList = new ArrayList<>();
-//    List<String> BookingNames = new ArrayList<>
-//            (Arrays.asList("Table Tennis", "Badminton","Basketball"));
-//
-//    List<String> BookingFacilities = new ArrayList<>(Arrays.asList("BON Multi-purpose Room 4/5", "BON Gym 2/3", "CAM Sportshall 3/4"));
-//
-//    List<String> BookingCenters = new ArrayList<>(Arrays.asList("Bonsor Recreation Complex (BON)", "Bonsor Recreation Complex (BON)", "Cameron Recreation Complex (CAM)"));
-//    List<String> BookingDates = new ArrayList<>(Arrays.asList("Oct 30, 2023", "Oct 30, 2023", "Oct 30, 2023"));
-//
-//    List<String> BookingTimes = new ArrayList<>(Arrays.asList("Mon 7:45 PM - 9:45 PM", " Mon 7:45 PM - 9:45 PM", " Mon 7:45 PM - 9:45 PM"));
-//
-//    List<Integer> BookingActivityLogos = new ArrayList<>(Arrays.asList(R.drawable.table_tennis, R.drawable.badminton, R.drawable.basketball));
-//    List<String> BookingStatuses = new ArrayList<>(Arrays.asList("Upcoming", "Upcoming", "Upcoming"));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //LoadMoreData();
+
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
@@ -73,23 +61,15 @@ public class UpcomingBookingFragment extends Fragment {
 
         // Start a background task using ExecutorService
         executorService.execute(() -> {
-            // Perform background work
             UpcomingBookingList = fetchDataFromlldb();
-            //saveDataToDatabase(entities);
-
             requireActivity().runOnUiThread(() -> {
-                // Initialize your custom adapter
+                // Initialize adapter
                 BookingAdapter myAdapter = new BookingAdapter(UpcomingBookingList);
-
-                // Find the ListView in your layout
                 ListView lstViewBooking = view.findViewById(R.id.lstViewBooking);
-
                 // Set the adapter to the ListView
                 lstViewBooking.setAdapter(myAdapter);
 
                 Log.d("upcoming", "successful run ui");
-
-
 
             });
         });
@@ -117,24 +97,7 @@ public class UpcomingBookingFragment extends Fragment {
        return view;
     }
 
-//    private class InitRoomDatabaseTask extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            // Initialize the Room database in the background
-//            lldb = Room.databaseBuilder(requireContext(), LeisureLinkDatabase.class, "leisurelink.db")
-//                    .build();
-//            return null;
-//        }
-//    }
 
-//    private List<Booking> fetchUpcomingBookingList() {
-//        List<Booking> upcomingBookingList;
-//        // Simulate fetching data from the network
-//        // Replace this with your actual network request logic
-//        // ...
-//
-//        return upcomingBookingList;
-//    }
 
     private List<Booking> fetchDataFromlldb() {
         List<Booking> UpcomingBookingFromDB = lldb.bookingDao().GetUpcomingBookings(userId);
@@ -143,14 +106,7 @@ public class UpcomingBookingFragment extends Fragment {
         return UpcomingBookingFromDB;
     }
 
-//    private class InitRoomDatabaseTask implements Runnable {
-//        @Override
-//        public void run() {
-//            // Initialize the Room database in the background
-//            lldb = Room.databaseBuilder(requireContext(), LeisureLinkDatabase.class, "leisurelink.db")
-//                    .build();
-//        }
-//    }
+
 
     @Override
     public void onDestroy() {
@@ -159,12 +115,5 @@ public class UpcomingBookingFragment extends Fragment {
         executorService.shutdown();
     }
 
-//    private void LoadMoreData() {
-//
-//        for (int i = 0; i < BookingNames.size();i++){
-//            Booking eachBooking =
-//                    new Booking(BookingNames.get(i),BookingActivityLogos.get(i), BookingCenters.get(i), BookingFacilities.get(i), BookingDates.get(i), BookingTimes.get(i), BookingStatuses.get(i));
-//            UpcomingBookingList.add(eachBooking);
-//        }
-//    }
+
 }
