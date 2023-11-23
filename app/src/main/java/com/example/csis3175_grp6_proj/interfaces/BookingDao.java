@@ -65,6 +65,9 @@ public interface BookingDao {
     @Query("SELECT beactivepassholder FROM bookings JOIN users ON bookings.userid = users.userid WHERE bookings.bookingid = :bookingId")
     boolean GetUserPassStatus(int bookingId);
 
+    @Query("UPDATE bookings SET status = 'Cancelled' WHERE bookingid = :bookingId")
+    void cancelOneBooking(int bookingId);
+
     //show activity date
     //show venue id
 

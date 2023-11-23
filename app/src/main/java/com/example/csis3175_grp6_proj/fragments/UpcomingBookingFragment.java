@@ -71,6 +71,19 @@ public class UpcomingBookingFragment extends Fragment {
 
                 Log.d("upcoming", "successful run ui");
 
+                lstViewBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Log.d("upcomingbookingbutton", String.valueOf(i));
+                        Booking clickedBooking = (Booking) adapterView.getItemAtPosition(i);
+                        int bookingId = clickedBooking.getBoookingId();
+                        Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
+                        intent.putExtra("bookingId", bookingId);
+                        Log.d("upcoming", Integer.toString(bookingId));
+                        startActivity(intent);
+                    }
+                });
+
             });
         });
 
@@ -85,14 +98,7 @@ public class UpcomingBookingFragment extends Fragment {
         // Set the adapter for the ListView
         //lstViewBooking.setAdapter(myAdapter);
         // Route to booking review activity on click
-//        lstViewBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Log.d("icyfung", String.valueOf(i));
-//                Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
 //
        return view;
     }
