@@ -12,12 +12,15 @@ import android.util.Log;
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
 import com.example.csis3175_grp6_proj.models.Sport;
+import com.example.csis3175_grp6_proj.models.TimeSlot;
 import com.example.csis3175_grp6_proj.models.User;
+import com.example.csis3175_grp6_proj.models.Venue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity  {
     String userId;
     LeisureLinkDatabase lldb;
     List<Sport> Sports = new ArrayList<>();
+    List<Venue> Venues = new ArrayList<>();
+    List<TimeSlot> TimeSlots = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +94,61 @@ public class MainActivity extends AppCompatActivity  {
         }
         return Sports;
     }
+
+    private List<Venue> ReadVenuesCSV() {
+        List<Venue> Venues = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(R.raw.venues);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String venueLine;
+        try {
+            if ((venueLine = reader.readLine()) != null) {
+
+            }
+            while ((venueLine = reader.readLine()) != null) {
+                String[] eachVenueLine = venueLine.split(",");
+                Venue eachVenue = new Venue(eachVenueLine[0], eachVenueLine[1], eachVenueLine[2], eachVenueLine[3]);
+                Venues.add(eachVenue);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally{
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return Venues;
+    }
+
+    private List<TimeSlot> ReadTimeSlotsCSV() {
+        List<TimeSlot> TimeSlots = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(R.raw.timeslots);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String timeSlotLine;
+        try {
+            if ((timeSlotLine = reader.readLine()) != null) {
+
+            }
+            while ((timeSlotLine = reader.readLine()) != null) {
+                String[] eachTimeSlotLine = timeSlotLine.split(",");
+                int dayOfWeek = Integer.parseInt(eachTimeSlotLine[1]);
+                int hour = Integer.parseInt(eachTimeSlotLine[2]);
+                TimeSlot eachTimeSlot = new TimeSlot(eachTimeSlotLine[0], dayOfWeek, hour);
+                TimeSlots.add(eachTimeSlot);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally{
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return TimeSlots;
+    }
+
 
 
 
