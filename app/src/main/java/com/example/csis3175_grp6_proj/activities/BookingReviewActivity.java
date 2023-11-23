@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.csis3175_grp6_proj.R;
@@ -39,6 +40,7 @@ public class BookingReviewActivity extends AppCompatActivity {
         TextView txtViewReviewVenue = findViewById(R.id.txtViewReviewBookingCenterInfo);
         TextView txtViewReviewFacility = findViewById(R.id.txtViewReviewBookingFacilityInfo);
         TextView txtViewPaymentMode = findViewById(R.id.txtViewModeOfPaymentInfo);
+        ImageView imgViewBookingLogo = findViewById(R.id.imgViewBookingReviewActivityLogo);
 
         lldb = Room.databaseBuilder(getApplicationContext(),
                 LeisureLinkDatabase.class,"leisurelink.db").build();
@@ -99,12 +101,10 @@ public class BookingReviewActivity extends AppCompatActivity {
                         txtViewReviewVenue.setText(venueName);
                         txtViewReviewDate.setText(engDayOfWeek + " " + clickedBooking.getActivityDate());
                         txtViewReviewTime.setText(duration);
+                        imgViewBookingLogo.setImageResource(getResources().getIdentifier(sportImageName, "drawable", getPackageName()));
 
                     }
                 });
-
-
-
 
 
             }
