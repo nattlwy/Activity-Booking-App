@@ -25,10 +25,20 @@ public interface BookingDao {
     List<Booking> GetAllBookings();
 
 
-    //add query to find booking with status = Upcoming and :userId
-    //add query to find booking with status = History and :userId
+    //add query to find booking with status = Upcoming and :userId -> return list booking
+    @Query("SELECT * FROM bookings WHERE userId = :userId AND status = 'Upcoming'")
+    List<Booking> GetUpcomingBookings(String userId);
+
+    //add query to find booking with status = History and :userId -> return list
+    @Query("SELECT * FROM bookings WHERE userId = :userId AND status = 'History'")
+    List<Booking> GetHistoryBookings(String userId);
+
     //add query to find booking with status = Cancelled and :userId
+    @Query("SELECT * FROM bookings WHERE userId = :userId AND status = 'Cancelled'")
+    List<Booking> GetCancelledBookings(String userId);
     //show activity date
+
+
     //add query to find sport name with inner join sport table and booking table
     //add query to find facility name with inner join sport table and booking table
     //add query to find venue name with inner join venue table and booking table
