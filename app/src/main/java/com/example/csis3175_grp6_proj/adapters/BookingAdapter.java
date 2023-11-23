@@ -48,7 +48,9 @@ public class BookingAdapter extends BaseAdapter {
         TextView txtViewBookingDateAndTime = view.findViewById(R.id.txtViewBookingDateAndTime);
         ImageView imgViewBookingLogo = view.findViewById(R.id.imgViewBookingLogo);
 
-//        txtViewBookingName.setText(adapterBookings.get(i).getBookingName());
+        String SportName = adapterBookings.get(i).getSportId();
+
+          txtViewBookingName.setText(SportName);
 //        txtViewBookingVenueName.setText(adapterBookings.get(i).getBookingFacility());
 //        txtViewBookingDateAndTime.setText(adapterBookings.get(i).getBookingDate() + " " + adapterBookings.get(i).getBookingTime());
 //
