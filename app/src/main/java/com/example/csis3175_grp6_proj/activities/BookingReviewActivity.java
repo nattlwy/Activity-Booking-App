@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
@@ -125,7 +126,27 @@ public class BookingReviewActivity extends AppCompatActivity {
             builder.setPositiveButton(R.string.cancelBookingDialogYesBtnTxt, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Log.d("icyfung", "Yes, cancel");
+                    Log.d("BookingReviewActivity", "Entered on click (step 1)");
+
+                    // Use ExecutorService for database operation
+                    executorService.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Perform the database operation in the background
+                            lldb.bookingDao().cancelOneBooking(bookingId);
+
+                            // Update UI on the main thread
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.d("BookingReviewActivity", "Cancelled (step 2)");
+                                    Toast.makeText(BookingReviewActivity.this, "Booking successfully cancelled", Toast.LENGTH_SHORT).show();
+                                    Log.d("icyfung", "Yes, cancel");
+                                    startActivity(new Intent(BookingReviewActivity.this, MyBookingActivity.class));
+                                }
+                            });
+                        }
+                    });
                 }
             });
             // No button
