@@ -48,11 +48,11 @@ public class BookingAdapter extends BaseAdapter {
         TextView txtViewBookingDateAndTime = view.findViewById(R.id.txtViewBookingDateAndTime);
         ImageView imgViewBookingLogo = view.findViewById(R.id.imgViewBookingLogo);
 
-        txtViewBookingName.setText(adapterBookings.get(i).getBookingName());
-        txtViewBookingVenueName.setText(adapterBookings.get(i).getBookingFacility());
-        txtViewBookingDateAndTime.setText(adapterBookings.get(i).getBookingDate() + " " + adapterBookings.get(i).getBookingTime());
-
-        imgViewBookingLogo.setImageResource(adapterBookings.get(i).getBookingActivityPic());
+//        txtViewBookingName.setText(adapterBookings.get(i).getBookingName());
+//        txtViewBookingVenueName.setText(adapterBookings.get(i).getBookingFacility());
+//        txtViewBookingDateAndTime.setText(adapterBookings.get(i).getBookingDate() + " " + adapterBookings.get(i).getBookingTime());
+//
+//        imgViewBookingLogo.setImageResource(adapterBookings.get(i).getBookingActivityPic());
 
         return view;
     }

@@ -41,38 +41,38 @@ public class UpcomingBookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        LoadMoreData();
+        //LoadMoreData();
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
+        return inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
+        //View view = inflater.inflate(R.layout.fragment_upcoming_booking, container, false);
 
         // Find the ListView by its ID
-        ListView lstViewBooking = view.findViewById(R.id.lstViewBooking);
+        //ListView lstViewBooking = view.findViewById(R.id.lstViewBooking);
 
         // Create a custom adapter to display your booking data
-        BookingAdapter myAdapter = new BookingAdapter(UpcomingBookingList);
+        //BookingAdapter myAdapter = new BookingAdapter(UpcomingBookingList);
         // Set the adapter for the ListView
-        lstViewBooking.setAdapter(myAdapter);
+        //lstViewBooking.setAdapter(myAdapter);
         // Route to booking review activity on click
-        lstViewBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("icyfung", String.valueOf(i));
-                Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        return view;
+//        lstViewBooking.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Log.d("icyfung", String.valueOf(i));
+//                Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        return view;
     }
 
-    private void LoadMoreData() {
-
-        for (int i = 0; i < BookingNames.size();i++){
-            Booking eachBooking =
-                    new Booking(BookingNames.get(i),BookingActivityLogos.get(i), BookingCenters.get(i), BookingFacilities.get(i), BookingDates.get(i), BookingTimes.get(i), BookingStatuses.get(i));
-            UpcomingBookingList.add(eachBooking);
-        }
-    }
+//    private void LoadMoreData() {
+//
+//        for (int i = 0; i < BookingNames.size();i++){
+//            Booking eachBooking =
+//                    new Booking(BookingNames.get(i),BookingActivityLogos.get(i), BookingCenters.get(i), BookingFacilities.get(i), BookingDates.get(i), BookingTimes.get(i), BookingStatuses.get(i));
+//            UpcomingBookingList.add(eachBooking);
+//        }
+//    }
 }
