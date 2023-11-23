@@ -53,6 +53,7 @@ public interface BookingDao {
     @Query("SELECT venuename FROM bookings JOIN venues ON bookings.venueid = venues.venueid WHERE bookings.bookingid = :bookingId")
     String GetVenueName(int bookingId);
 
+
     //add query to find timeslot day of week with inner join timeslot table
     @Query("SELECT dayofweek FROM bookings JOIN timeslots ON bookings.timeslotid = timeslots.timeslotid WHERE bookings.bookingid = :bookingId")
     int GetDayOfWeek(int bookingId);
