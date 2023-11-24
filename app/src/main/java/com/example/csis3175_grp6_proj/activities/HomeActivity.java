@@ -91,17 +91,6 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
                 recyclerViewIcons.setLayoutManager(gm);
             }
         });
-
-//
-//        SportsIconList.add(
-//                new SportsIcon(101, "Basketball", R.drawable.basketball)
-//        );
-//        SportsIconList.add(
-//                new SportsIcon(102, "Badminton", R.drawable.badminton)
-//        );
-//        SportsIconList.add(
-//                new SportsIcon(103, "Table Tennis", R.drawable.table_tennis)
-//        );
     }
 
     @Override
@@ -110,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
 
         Bundle bundle = new Bundle();
         bundle.putString("sport", sportName);
+        bundle.putString("sportId", SportsList.get(i).getSportId());
         Intent intent = new Intent(HomeActivity.this, SportsBookingActivity2.class);
         intent.putExtras(bundle);
         startActivity(intent);
