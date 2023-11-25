@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class SportsBookingActivity2 extends AppCompatActivity {
     List<TimeSlot> availableTimeslots;
     List<String> availableTimeslotStrs = new ArrayList<>();
     Booking CurrBooking = new Booking();
+    int CurrBookingDayOfWeek;
+    Bundle bundle = new Bundle();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +73,11 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                 CurrBooking.setVenueId(
                         venueList.get(position).getVenueId()
                 );
+                bundle.putString("VenueName", venueList.get(position).getVenueName());
+                LoadAvailableTimeSlotsFromDB(CurrBooking.getActivityDate(), CurrBookingDayOfWeek, CurrBooking.getVenueId());
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         // TimeSlots
@@ -82,10 +85,10 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar today = Calendar.getInstance();
         String todayStr = sdf.format(today.getTime());
-        int todayDayOfWeek = today.get(Calendar.DAY_OF_WEEK) - 1;
-        if (todayDayOfWeek == 0)
-            todayDayOfWeek = 7;
-        LoadAvailableTimeSlotsFromDB(todayStr, todayDayOfWeek);
+        CurrBookingDayOfWeek = today.get(Calendar.DAY_OF_WEEK) - 1;
+        if (CurrBookingDayOfWeek == 0)
+            CurrBookingDayOfWeek = 7;
+        LoadAvailableTimeSlotsFromDB(todayStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
         ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
         spinnerTimeSlotBooking.setAdapter(arrAdapter);
 
@@ -111,11 +114,11 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                 String dateStr = dayOfMonth + "/" + (month+1) + "/" + year;
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
-                int dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK) - 1;
-                if (dayOfWeek == 0)
-                    dayOfWeek = 7;
-                Log.d("SportBooking", dateStr + " " + dayOfWeek);
-                LoadAvailableTimeSlotsFromDB(dateStr, dayOfWeek);
+                CurrBookingDayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK) - 1;
+                if (CurrBookingDayOfWeek == 0)
+                    CurrBookingDayOfWeek = 7;
+                Log.d("SportBooking", dateStr + " " + CurrBookingDayOfWeek);
+                LoadAvailableTimeSlotsFromDB(dateStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
                 ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
                 spinnerTimeSlotBooking.setAdapter(arrAdapter);
                 CurrBooking.setActivityDate(dateStr);
@@ -133,6 +136,17 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         Button proceedBtn = findViewById(R.id.btnProceedBooking);
         proceedBtn.setOnClickListener((View view) -> {
             Log.d("SportBooking", String.format("%s %s %s %s", CurrBooking.getUserId(), CurrBooking.getSportId(), CurrBooking.getActivityDate(), CurrBooking.getTimeSlotId()));
+            bundle.putString("SportName", sportName);
+            bundle.putInt("UserId", CurrBooking.getUserId());
+            bundle.putString("SportId", CurrBooking.getSportId());
+            bundle.putString("ActivityDate", CurrBooking.getActivityDate());
+            bundle.putString("VenueId", CurrBooking.getVenueId());
+            bundle.putString("TimeSlotId", CurrBooking.getTimeSlotId());
+            bundle.putInt("BookingDayOfWeek", CurrBookingDayOfWeek);
+
+            Intent intent = new Intent(SportsBookingActivity2.this, BookConfirmationActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         });
 
     }
@@ -155,17 +169,18 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         });
     }
 
-    public void LoadAvailableTimeSlotsFromDB(String date, int dayOfWeek) {
+    public void LoadAvailableTimeSlotsFromDB(String date, int dayOfWeek, String venueId) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                availableTimeslots = lldb.timeSlotDao().GetAvailableTimeSlotOfTheDay(date, dayOfWeek);
+                availableTimeslots = lldb.timeSlotDao().GetAvailableTimeSlotOfTheDay(date, dayOfWeek, venueId);
                 availableTimeslotStrs.clear();
                 for (TimeSlot ts : availableTimeslots){
                     String timeslotStr = ts.getHour() + ":00 - " + (ts.getHour() + 2) + ":00" ;
 //                    Log.d("SportBooking", timeslotStr);
                     availableTimeslotStrs.add(timeslotStr);
+                    bundle.putString("TimeSlotString", timeslotStr);
                 }
             }
         });

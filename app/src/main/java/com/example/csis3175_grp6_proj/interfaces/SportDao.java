@@ -22,4 +22,6 @@ public interface SportDao {
 
     @Query("SELECT * FROM sports")
     List<Sport> GetAllSports();
+    @Query("SELECT facility FROM sports WHERE sportid = :id")
+    String GetSportFacilityById(String id);
 }
