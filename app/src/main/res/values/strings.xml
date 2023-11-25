@@ -64,4 +64,5 @@
     <string name="txtBtnConfirmation">Confirm</string>
     <string name="msgErrorConfirmBook">Error in booking. Please try again later.</string>
     <string name="msgSuccessConfirmBook">Booking successful.</string>
+    <string name="txtBtnNext">Next</string>
 </resources>

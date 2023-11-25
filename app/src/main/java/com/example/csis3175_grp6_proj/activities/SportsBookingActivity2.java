@@ -90,6 +90,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
             CurrBookingDayOfWeek = 7;
         LoadAvailableTimeSlotsFromDB(todayStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
         ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
+        arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTimeSlotBooking.setAdapter(arrAdapter);
 
         spinnerTimeSlotBooking.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,6 +122,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                 Log.d("SportBooking", dateStr + " " + CurrBookingDayOfWeek);
                 LoadAvailableTimeSlotsFromDB(dateStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
                 ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
+                arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerTimeSlotBooking.setAdapter(arrAdapter);
                 CurrBooking.setActivityDate(dateStr);
             }
@@ -165,6 +167,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                 Spinner venueSpinner = findViewById(R.id.spinnerVenueBooking);
                 // add venue to spinner
                 ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, venueNameList);
+                arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 venueSpinner.setAdapter(arrAdapter);
             }
         });
