@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity  {
         Intent intent;
         if (userId != null ) {
             intent = new Intent(MainActivity.this, HomeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("confirmBooking", false);
+            intent.putExtras(bundle);
         }
         else {
             intent = new Intent(MainActivity.this, LogIn.class);

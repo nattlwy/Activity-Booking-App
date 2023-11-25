@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
@@ -41,6 +42,9 @@ public class HomeActivity extends AppCompatActivity implements SportsIconRecycle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Bundle extras = getIntent().getExtras();
+        if (extras.getBoolean("confirmBooking"))
+            Toast.makeText(this, R.string.msgSuccessConfirmBook, Toast.LENGTH_LONG).show();
 
         // Populate Sports Grid Layout
         LoadSportsDataFromRoomDB();

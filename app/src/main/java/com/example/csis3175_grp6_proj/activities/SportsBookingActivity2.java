@@ -96,6 +96,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CurrBooking.setTimeSlotId(availableTimeslots.get(position).getTimeSlotId());
+                bundle.putString("TimeSlotString", availableTimeslotStrs.get(position));
             }
 
             @Override
@@ -180,7 +181,6 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                     String timeslotStr = ts.getHour() + ":00 - " + (ts.getHour() + 2) + ":00" ;
 //                    Log.d("SportBooking", timeslotStr);
                     availableTimeslotStrs.add(timeslotStr);
-                    bundle.putString("TimeSlotString", timeslotStr);
                 }
             }
         });

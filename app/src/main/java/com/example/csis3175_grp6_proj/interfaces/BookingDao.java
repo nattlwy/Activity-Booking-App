@@ -19,7 +19,7 @@ public interface BookingDao {
     Long[] insertBookingsFromList(List<Booking> Bookings);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertOneBooking(Booking booking);
+    long insertOneBooking(Booking booking);
 
     @Query("SELECT * FROM bookings")
     List<Booking> GetAllBookings();
@@ -73,9 +73,8 @@ public interface BookingDao {
 
     //show activity date
     //show venue id
-
-
-
+    @Query("SELECT MAX(bookingid) FROM bookings")
+    String GetCurrMaxBookingId();
 
 
 }

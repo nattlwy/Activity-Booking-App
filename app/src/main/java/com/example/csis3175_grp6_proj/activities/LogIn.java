@@ -78,7 +78,10 @@ public class LogIn extends AppCompatActivity {
                                 // put curr user id to shared preference for single login
                                 sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
                                 sharedPreferences.edit().putString("USER_ID", String.valueOf(user.getUserId())).apply();
-                                startActivity(new Intent(LogIn.this, HomeActivity.class));
+                                Intent intent = new Intent(LogIn.this, HomeActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putBoolean("confirmBooking", false);
+                                startActivity(intent);
                             }
                         });
                     }

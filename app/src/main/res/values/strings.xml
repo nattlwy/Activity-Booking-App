@@ -62,4 +62,6 @@
     <string name="txtModeOfPayment">Payment Mode</string>
     <string name="txtModeOfPaymentInfo">CAD $3.99 Pay At Venue</string>
     <string name="txtBtnConfirmation">Confirm</string>
+    <string name="msgErrorConfirmBook">Error in booking. Please try again later.</string>
+    <string name="msgSuccessConfirmBook">Booking successful.</string>
 </resources>

@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 
 public class Booking {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name="bookingid")
     private int BoookingId;
