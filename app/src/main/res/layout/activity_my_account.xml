@@ -87,6 +87,7 @@
         android:text="@string/txtBirthday"
         android:textColor="#3F51B5"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/scrollViewMyAccount" />
 
@@ -99,6 +100,7 @@
         android:text="@string/txtUserEmail"
         android:textColor="#3F51B5"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/scrollViewMyAccount" />
 
@@ -136,6 +138,7 @@
         android:text="@string/txtBeActivePass"
         android:textColor="#3F51B5"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewBirthday" />
 
@@ -162,6 +165,7 @@
         android:text="@string/txtBeActivePassNumber"
         android:textColor="#3F51B5"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewBeActivePass" />
 
