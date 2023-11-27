@@ -39,7 +39,7 @@
     <string name="txtLoginPassword">Password</string>
     <string name="txtLoginNotMember">Not a member yet?</string>
     <string name="txtLoginRegister">Click here to register</string>
-    <string name="txtRegisterTitle">REGISTER</string>
+    <string name="txtRegisterTitle">Register</string>
     <string name="txtRegisterEmail">Email address</string>
     <string name="txtRegisterFirstN">First name</string>
     <string name="txtRegisterLastN">Last name</string>

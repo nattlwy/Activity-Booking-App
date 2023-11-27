@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,7 +28,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class BookConfirmationActivity extends AppCompatActivity {
-    String NextBookingId;
+    int lastBookingId;
     LeisureLinkDatabase lldb;
     int nextBookingId;
     @Override
@@ -65,6 +66,8 @@ public class BookConfirmationActivity extends AppCompatActivity {
 
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +83,9 @@ public class BookConfirmationActivity extends AppCompatActivity {
             }
         });
 
+
         Booking booking = new Booking();
+        //booking.setBookingId(nextBookingId);
         booking.setActivityDate(extras.getString("ActivityDate"));
         booking.setUserId(extras.getInt("UserId"));
         booking.setSportId(extras.getString("SportId"));
@@ -102,17 +107,20 @@ public class BookConfirmationActivity extends AppCompatActivity {
                 public void run() {
 //                    nextBookingId = Integer.parseInt(lldb.bookingDao().GetCurrMaxBookingId()) + 1;
 //                    booking.setBoookingId(nextBookingId);
-                    long insertID = lldb.bookingDao().insertOneBooking(booking);
-                    if (insertID == -1) {
-                        Toast.makeText(BookConfirmationActivity.this, R.string.msgErrorConfirmBook, Toast.LENGTH_LONG).show();
-                    }
-                    else {
+                    lastBookingId = lldb.bookingDao().getLastInsertedBooking().getBookingId();Log.d("booking", Integer.toString(lastBookingId) + " step1");
+                    nextBookingId = lastBookingId + 1;
+                    booking.setBookingId(nextBookingId);
+                    lldb.bookingDao().insertOneBooking(booking);
+//                    if (insertID == -1) {
+//                        Toast.makeText(BookConfirmationActivity.this, R.string.msgErrorConfirmBook, Toast.LENGTH_LONG).show();
+//                    }
+//                    else {
                         Intent intent = new Intent(BookConfirmationActivity.this, HomeActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putBoolean("confirmBooking", true);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                    }
+//                    }
                 }
             });
         });

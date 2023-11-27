@@ -6,17 +6,18 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "bookings", foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "userid", childColumns = "userid"),
+@Entity(tableName = "bookings", foreignKeys = {
+        @ForeignKey(entity = User.class, parentColumns = "userid", childColumns = "userid"),
         @ForeignKey(entity = Venue.class, parentColumns = "venueid", childColumns = "venueid"),
         @ForeignKey(entity = TimeSlot.class, parentColumns = "timeslotid", childColumns = "timeslotid"),
         @ForeignKey(entity = Sport.class, parentColumns = "sportid", childColumns = "sportid")})
 
 public class Booking {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name="bookingid")
-    private int BoookingId;
+    private int BookingId;
 
     @NonNull
     @ColumnInfo(name="userid")
@@ -46,12 +47,12 @@ public class Booking {
     @ColumnInfo(name="bookingtimestamp")
     private Long BookingTimeStamp;
 
-    public int getBoookingId() {
-        return BoookingId;
+    public int getBookingId() {
+        return BookingId;
     }
 
-    public void setBoookingId(int boookingId) {
-        BoookingId = boookingId;
+    public void setBookingId(int bookingId) {
+        BookingId = bookingId;
     }
 
     public int getUserId() {
@@ -116,8 +117,8 @@ public class Booking {
         BookingTimeStamp = bookingTimeStamp;
     }
 
-    public Booking(int boookingId, int userId, @NonNull String venueId, @NonNull String timeSlotId, @NonNull String sportId, @NonNull String status, @NonNull String activityDate, @NonNull Long bookingTimeStamp) {
-        BoookingId = boookingId;
+    public Booking(int bookingId, int userId, @NonNull String venueId, @NonNull String timeSlotId, @NonNull String sportId, @NonNull String status, @NonNull String activityDate, @NonNull Long bookingTimeStamp) {
+        BookingId = bookingId;
         UserId = userId;
         VenueId = venueId;
         TimeSlotId = timeSlotId;

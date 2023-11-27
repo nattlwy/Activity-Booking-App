@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.csis3175_grp6_proj.R;
 import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
+import com.example.csis3175_grp6_proj.models.Booking;
 import com.example.csis3175_grp6_proj.models.User;
 
 import java.io.BufferedReader;
@@ -29,6 +30,8 @@ import java.util.concurrent.Executors;
 
 public class LogIn extends AppCompatActivity {
     List<User> UserList = new ArrayList<>();
+
+    List<Booking> Bookings = new ArrayList<>();
     LeisureLinkDatabase lldb;
     public static final String SHARED_PREFS = "shared_prefs";
     SharedPreferences sharedPreferences;
@@ -46,6 +49,7 @@ public class LogIn extends AppCompatActivity {
         //Load file in
         UserList = ReadUserCSV();
         Log.d("LogIn",UserList.size()+ " Users in file");
+        Bookings = ReadBookingsCSV();
 
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -54,6 +58,7 @@ public class LogIn extends AppCompatActivity {
             public void run() {
                 lldb.userDao().insertUsersFromList(UserList);
                 List<User> UsersFromDB = lldb.userDao().GetAllUsers();
+                lldb.bookingDao().insertBookingsFromList(Bookings);
             }
         });
 
@@ -73,6 +78,7 @@ public class LogIn extends AppCompatActivity {
                         runOnUiThread(() -> {
                             if (user == null) {
                                 Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                                Log.d("login", "unidentified user");
                             }
                             else {
                                 // put curr user id to shared preference for single login
@@ -81,6 +87,8 @@ public class LogIn extends AppCompatActivity {
                                 Intent intent = new Intent(LogIn.this, HomeActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putBoolean("confirmBooking", false);
+                                intent.putExtras(bundle);
+                                Log.d("login", "identified user");
                                 startActivity(intent);
                             }
                         });
@@ -129,5 +137,30 @@ public class LogIn extends AppCompatActivity {
             }
         }
         return Users;
+    }
+
+    private List<Booking> ReadBookingsCSV() {
+        List<Booking> Bookings = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(R.raw.bookings);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        String bookingLine;
+
+        try {
+            if ((bookingLine = reader.readLine()) != null) {  }
+            while ((bookingLine = reader.readLine()) != null) {
+                String[] eachBookingLine = bookingLine.split(",");
+                Booking eachBooking = new Booking(Integer.parseInt(eachBookingLine[0]), Integer.parseInt(eachBookingLine[1]), eachBookingLine[2], eachBookingLine[3], eachBookingLine[4], eachBookingLine[5], eachBookingLine[6], Long.parseLong(eachBookingLine[7]));
+                Bookings.add(eachBooking);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally{
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return Bookings;
     }
 }

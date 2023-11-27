@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.csis3175_grp6_proj.models.Booking;
+import com.example.csis3175_grp6_proj.models.User;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface BookingDao {
     Long[] insertBookingsFromList(List<Booking> Bookings);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertOneBooking(Booking booking);
+    void insertOneBooking(Booking booking);
 
     @Query("SELECT * FROM bookings")
     List<Booking> GetAllBookings();
@@ -75,6 +76,9 @@ public interface BookingDao {
     //show venue id
     @Query("SELECT MAX(bookingid) FROM bookings")
     String GetCurrMaxBookingId();
+
+    @Query("SELECT * FROM bookings ORDER BY bookingid DESC LIMIT 1")
+    Booking getLastInsertedBooking();
 
 
 }

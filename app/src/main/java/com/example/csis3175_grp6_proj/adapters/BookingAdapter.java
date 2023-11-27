@@ -58,7 +58,7 @@ public class BookingAdapter extends BaseAdapter {
         TextView txtViewBookingDateAndTime = view.findViewById(R.id.txtViewBookingDateAndTime);
         ImageView imgViewBookingLogo = view.findViewById(R.id.imgViewBookingLogo);
 
-        int bookingId = adapterBookings.get(i).getBoookingId();
+        int bookingId = adapterBookings.get(i).getBookingId();
         String venueId = adapterBookings.get(i).getVenueId();
         Log.d("bookingadpater", Integer.toString(bookingId));
 

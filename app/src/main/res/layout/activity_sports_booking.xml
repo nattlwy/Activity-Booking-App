@@ -62,9 +62,10 @@
 
     <Button
         android:id="@+id/btnProceedBooking"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:backgroundTint="#4ca1af"
         android:text="@string/txtBtnNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity  {
     List<Venue> Venues = new ArrayList<>();
     List<TimeSlot> TimeSlots = new ArrayList<>();
 
-    List<Booking> Bookings = new ArrayList<>();
+//    List<Booking> Bookings = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +52,16 @@ public class MainActivity extends AppCompatActivity  {
         Sports = ReadSportsCSV();
         Venues = ReadVenuesCSV();
         TimeSlots = ReadTimeSlotsCSV();
-        Bookings = ReadBookingsCSV();
+//        Bookings = ReadBookingsCSV();
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                lldb.sportDao().insertSportsFromList(Sports);
                 lldb.venueDao().insertVenuesFromList(Venues);
                 lldb.timeSlotDao().insertTimeSlotsFromList(TimeSlots);
-                lldb.bookingDao().insertBookingsFromList(Bookings);
+                lldb.sportDao().insertSportsFromList(Sports);
+//                lldb.bookingDao().insertBookingsFromList(Bookings);
             }
 
         });
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         return Bookings;
     }
+
 
 
 

@@ -76,7 +76,7 @@ public class UpcomingBookingFragment extends Fragment {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Log.d("upcomingbookingbutton", String.valueOf(i));
                         Booking clickedBooking = (Booking) adapterView.getItemAtPosition(i);
-                        int bookingId = clickedBooking.getBoookingId();
+                        int bookingId = clickedBooking.getBookingId();
                         Intent intent = new Intent(getActivity(), BookingReviewActivity.class);
                         intent.putExtra("bookingId", bookingId);
                         Log.d("upcoming", Integer.toString(bookingId));
