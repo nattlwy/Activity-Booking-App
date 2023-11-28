@@ -24,6 +24,6 @@ public interface TimeSlotDao {
     @Query("SELECT * FROM timeslots")
     List<TimeSlot> GetAllTimeSlots();
 
-    @Query("SELECT * FROM TIMESLOTS WHERE timeslotid not in (SELECT timeslotid FROM BOOKINGS WHERE acivitydate = :date AND status != 'Cancelled' AND venueid = :venueId) AND dayofweek = :dayOfWeek")
-    List<TimeSlot> GetAvailableTimeSlotOfTheDay(String date, int dayOfWeek, String venueId);
+    @Query("SELECT * FROM TIMESLOTS WHERE timeslotid not in (SELECT timeslotid FROM BOOKINGS WHERE acivitydate = :date AND status != 'Cancelled' AND venueid = :venueId) AND dayofweek = :dayOfWeek AND hour > :currHour")
+    List<TimeSlot> GetAvailableTimeSlotOfTheDay(String date, int dayOfWeek, int currHour, String venueId);
 }

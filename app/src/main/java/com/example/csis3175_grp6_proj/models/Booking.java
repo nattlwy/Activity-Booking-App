@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "bookings", foreignKeys = {
         @ForeignKey(entity = User.class, parentColumns = "userid", childColumns = "userid"),
         @ForeignKey(entity = Venue.class, parentColumns = "venueid", childColumns = "venueid"),
@@ -129,6 +131,12 @@ public class Booking {
     }
 
     public Booking() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        ActivityDate = String.format("%s/%s/%s", year, month, day);
     }
 
 

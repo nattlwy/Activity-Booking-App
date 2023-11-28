@@ -42,6 +42,9 @@ public class SportsBookingActivity2 extends AppCompatActivity {
     Booking CurrBooking = new Booking();
     int CurrBookingDayOfWeek;
     Bundle bundle = new Bundle();
+    int SelectedYear;
+    int SelectedMonth;
+    int SelectedDayOfMonth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +77,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                         venueList.get(position).getVenueId()
                 );
                 bundle.putString("VenueName", venueList.get(position).getVenueName());
-                LoadAvailableTimeSlotsFromDB(CurrBooking.getActivityDate(), CurrBookingDayOfWeek, CurrBooking.getVenueId());
+                LoadAvailableTimeSlotsFromDB(SelectedYear, SelectedMonth, SelectedDayOfMonth, CurrBookingDayOfWeek, CurrBooking.getVenueId());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
@@ -88,10 +91,10 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         CurrBookingDayOfWeek = today.get(Calendar.DAY_OF_WEEK) - 1;
         if (CurrBookingDayOfWeek == 0)
             CurrBookingDayOfWeek = 7;
-        LoadAvailableTimeSlotsFromDB(todayStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
-        ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
-        arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTimeSlotBooking.setAdapter(arrAdapter);
+        LoadAvailableTimeSlotsFromDB(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), CurrBookingDayOfWeek, CurrBooking.getVenueId());
+//        ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
+//        arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerTimeSlotBooking.setAdapter(arrAdapter);
 
         spinnerTimeSlotBooking.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,12 +110,15 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         });
 
         // calendar
-        CalendarView calendar = findViewById(R.id.calendar);
-        calendar.setMinDate(System.currentTimeMillis());
-        calendar.setMaxDate(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        CalendarView calendarView = findViewById(R.id.calendar);
+        calendarView.setMinDate(System.currentTimeMillis());
+        calendarView.setMaxDate(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                SelectedYear = year;
+                SelectedMonth = month;
+                SelectedDayOfMonth = dayOfMonth;
                 String dateStr = dayOfMonth + "/" + (month+1) + "/" + year;
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
@@ -120,7 +126,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
                 if (CurrBookingDayOfWeek == 0)
                     CurrBookingDayOfWeek = 7;
                 Log.d("SportBooking", dateStr + " " + CurrBookingDayOfWeek);
-                LoadAvailableTimeSlotsFromDB(dateStr, CurrBookingDayOfWeek, CurrBooking.getVenueId());
+                LoadAvailableTimeSlotsFromDB(year, month, dayOfMonth, CurrBookingDayOfWeek, CurrBooking.getVenueId());
                 ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
                 arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerTimeSlotBooking.setAdapter(arrAdapter);
@@ -173,18 +179,42 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         });
     }
 
-    public void LoadAvailableTimeSlotsFromDB(String date, int dayOfWeek, String venueId) {
+    public void LoadAvailableTimeSlotsFromDB(int year, int month, int dayOfMonth, int dayOfWeek, String venueId) {
+        String date = dayOfMonth + "/" + (month+1) + "/" + year;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int currYear = calendar.get(Calendar.YEAR);
+        int currMonth = calendar.get(Calendar.MONTH);
+        int currDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        SelectedYear = year;
+        SelectedMonth = month;
+        SelectedDayOfMonth = dayOfMonth;
+        int currHour = 0;
+        Log.d("CurrDate", String.format("%s/%s/%s", currYear, currMonth, currDayOfMonth) + " vs " + String.format("%s/%s/%s", year, month, dayOfMonth));
+        if (currYear == year && currMonth == month && currDayOfMonth == dayOfMonth)
+            currHour = calendar.get(Calendar.HOUR_OF_DAY);
+        Spinner spinnerTimeSlotBooking = findViewById(R.id.spinnerTimeSlotBooking);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
+        int finalCurrHour = currHour;
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                availableTimeslots = lldb.timeSlotDao().GetAvailableTimeSlotOfTheDay(date, dayOfWeek, venueId);
+                availableTimeslots = lldb.timeSlotDao().GetAvailableTimeSlotOfTheDay(date, dayOfWeek, finalCurrHour, venueId);
                 availableTimeslotStrs.clear();
                 for (TimeSlot ts : availableTimeslots){
                     String timeslotStr = ts.getHour() + ":00 - " + (ts.getHour() + 2) + ":00" ;
 //                    Log.d("SportBooking", timeslotStr);
                     availableTimeslotStrs.add(timeslotStr);
                 }
+            }
+        });
+        executorService.shutdown();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
+                arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerTimeSlotBooking.setAdapter(arrAdapter);
             }
         });
     }
