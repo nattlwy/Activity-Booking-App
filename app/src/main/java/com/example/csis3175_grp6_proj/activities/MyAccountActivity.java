@@ -37,6 +37,8 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
 
     TextView txtViewPassNumInfo;
 
+    TextView txtViewBirthdayInfo;
+
     Button btnLogOut;
 
     LeisureLinkDatabase lldb;
@@ -58,6 +60,8 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
         txtViewEmailInfo = findViewById(R.id.txtViewEmailInfo);
         txtViewFullName = findViewById(R.id.txtViewUsername);
         txtViewPassNumInfo = findViewById(R.id.txtViewPassNumberInfo);
+        txtViewBirthdayInfo = findViewById(R.id.txtViewBirthdayInfo);
+
 
         lldb = Room.databaseBuilder(getApplicationContext(),
                 LeisureLinkDatabase.class,"leisurelink.db").build();
@@ -83,6 +87,7 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
                     currUserPassHolderYesOrNo = "No";
                 }
                 String currUserPassHolderNumber = currUser.getBeActivePassNum();
+                String currUserBirthday = currUser.getBirthday();
 
                 Log.d("myaccount", currUserFullName + " ");
 
@@ -93,6 +98,7 @@ public class MyAccountActivity extends AppCompatActivity implements NavigationBa
                         txtViewEmailInfo.setText(currUserEmail);
                         txtViewBeActivePassHolder.setText(currUserPassHolderYesOrNo);
                         txtViewPassNumInfo.setText(currUserPassHolderNumber);
+                        txtViewBirthdayInfo.setText(currUserBirthday);
                     }
                 });
 

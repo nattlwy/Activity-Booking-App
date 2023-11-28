@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity  {
     List<Venue> Venues = new ArrayList<>();
     List<TimeSlot> TimeSlots = new ArrayList<>();
 
-//    List<Booking> Bookings = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity  {
         Sports = ReadSportsCSV();
         Venues = ReadVenuesCSV();
         TimeSlots = ReadTimeSlotsCSV();
-//        Bookings = ReadBookingsCSV();
         lldb = Room.databaseBuilder(getApplicationContext(), LeisureLinkDatabase.class,"leisurelink.db").build();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new Runnable() {
@@ -166,36 +163,6 @@ public class MainActivity extends AppCompatActivity  {
         }
         return TimeSlots;
     }
-
-    private List<Booking> ReadBookingsCSV() {
-        List<Booking> Bookings = new ArrayList<>();
-        InputStream inputStream = getResources().openRawResource(R.raw.bookings);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        String bookingLine;
-
-        try {
-            if ((bookingLine = reader.readLine()) != null) {  }
-            while ((bookingLine = reader.readLine()) != null) {
-                String[] eachBookingLine = bookingLine.split(",");
-                Booking eachBooking = new Booking(Integer.parseInt(eachBookingLine[0]), Integer.parseInt(eachBookingLine[1]), eachBookingLine[2], eachBookingLine[3], eachBookingLine[4], eachBookingLine[5], eachBookingLine[6], Long.parseLong(eachBookingLine[7]));
-                Bookings.add(eachBooking);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally{
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return Bookings;
-    }
-
-
-
-
-
 
 
 }

@@ -116,86 +116,113 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
+                    }
+                });
 
-                        binding.btnSubmit.setOnClickListener((View view) -> {
+            }
+        });
 
-                            if (binding.txtFirstName.getText().toString().isEmpty()
-                                    || binding.txtLastName.getText().toString().isEmpty()
-                                    || binding.txtEmail.getText().toString().isEmpty()
-                                    || binding.txtDateOfBirth.getText().toString().isEmpty()
-                                    || binding.txtPasswordInput.getText().toString().isEmpty()
-                                    || binding.txtPasswordConfirm.getText().toString().isEmpty())
-                            {
-                                Toast.makeText(RegisterActivity.this, "First 6 fields must not be empty.", Toast.LENGTH_SHORT).show();
+        binding.btnSubmit.setOnClickListener((View view) -> {
+
+            if (binding.txtFirstName.getText().toString().isEmpty()
+                    || binding.txtLastName.getText().toString().isEmpty()
+                    || binding.txtEmail.getText().toString().isEmpty()
+                    || binding.txtDateOfBirth.getText().toString().isEmpty()
+                    || binding.txtPasswordInput.getText().toString().isEmpty()
+                    || binding.txtPasswordConfirm.getText().toString().isEmpty())
+            {
+                Toast.makeText(RegisterActivity.this, "First 6 fields must not be empty.", Toast.LENGTH_SHORT).show();
+            } else {
+
+                if (emailValid && passwordValid) {
+
+                    try {
+                        if (binding.CheckBoxActivePass.isChecked()) {
+                            if (binding.txtActivePassNum.getText().toString().isEmpty()) {
+                                Toast.makeText(RegisterActivity.this, "Please enter active pass number", Toast.LENGTH_SHORT).show();
                             } else {
+                                //verify activepass number
+                                for (String passNumber:BeActivePassNumberList) {
+                                    if(binding.txtActivePassNum.getText().toString().equals(passNumber)) {
+                                        //can create account
+                                        newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString());
+                                        //changing boolean activepassnumvalid
+                                        passNumberValid = true;
 
-                                if (emailValid && passwordValid) {
+                                        executorService.execute(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                lldb.userDao().insertOneUser(newUser);
 
-                                    try {
-                                        if (binding.CheckBoxActivePass.isChecked()) {
-                                            if (binding.txtActivePassNum.getText().toString().isEmpty()) {
-                                                Toast.makeText(RegisterActivity.this, "Please enter active pass number", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                //verify activepass number
-                                                for (String passNumber:BeActivePassNumberList) {
-                                                    if(binding.txtActivePassNum.getText().toString().equals(passNumber)) {
-                                                        //can create account
-                                                        newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),true, binding.txtActivePassNum.getText().toString());
-                                                        //changing boolean activepassnumvalid
-                                                        passNumberValid = true;
-                                                        //show successful msg
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+
                                                         Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
-                                                        new InsertUserTask().execute(newUser);
                                                         Log.d("Register", newUser.getUserId() + " is added.");
                                                         //redirect to log in page
                                                         startActivity(new Intent(RegisterActivity.this, LogIn.class));
 
                                                     }
-                                                }
-
-                                                if (!passNumberValid) {
-
-                                                    Toast.makeText(RegisterActivity.this, "This BeActivePass number is not found.", Toast.LENGTH_SHORT).show();
-
-                                                }
-
-
+                                                });
                                             }
-                                        } else {
-                                            //no activepass user adding to database
+                                        });
 
-                                            //user id update by 1
-                                            newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na");
-                                            new InsertUserTask().execute(newUser);
+                                    }
+                                }
+
+                                if (!passNumberValid) {
+
+                                    Toast.makeText(RegisterActivity.this, "This BeActivePass number is not found.", Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                            }
+                        } else {
+                            //no activepass user adding to database
+
+                            //user id update by 1
+                            newUser = new User(lastUserId+1, binding.txtFirstName.getText().toString(), binding.txtLastName.getText().toString(), binding.txtEmail.getText().toString(), binding.txtPasswordInput.getText().toString(), binding.txtDateOfBirth.getText().toString(),false, "na");
+//                            new InsertUserTask().execute(newUser);
+                            executorService.execute(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    lldb.userDao().insertOneUser(newUser);
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
                                             Log.d("Register", newUser.getUserId() + " is added.");
                                             Toast.makeText(RegisterActivity.this, "Account successfully created.", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(RegisterActivity.this, LogIn.class));
 
                                         }
+                                    });
 
-                                    } catch (Exception ex){
-                                        ex.printStackTrace();
-                                    }
-
-                                } else if(!emailValid) {
-
-                                    Toast.makeText(RegisterActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
-
-                                } else if(!passwordValid) {
-                                    Toast.makeText(RegisterActivity.this, "Confirm password doesn't match.", Toast.LENGTH_SHORT).show();
                                 }
-
-                            }
-
-
-                        });
+                            });
 
 
+                        }
+
+                    } catch (Exception ex){
+                        ex.printStackTrace();
                     }
-                });
 
+                } else if(!emailValid) {
+
+                    Toast.makeText(RegisterActivity.this, "This email is already registered.", Toast.LENGTH_SHORT).show();
+
+                } else if(!passwordValid) {
+                    Toast.makeText(RegisterActivity.this, "Confirm password doesn't match.", Toast.LENGTH_SHORT).show();
+                }
 
             }
+
+
         });
 
 
@@ -230,22 +257,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return BeActivePassNumbers;
-    }
-
-    private class InsertUserTask extends AsyncTask<User, Void, Void> {
-        @Override
-        protected Void doInBackground(User... users) {
-            // Perform background database operation (e.g., insert user)
-            lldb.userDao().insertOneUser(users[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            // Update UI or perform additional UI-related actions
-            Log.d("Register", "User inserted successfully");
-        }
     }
 
 }
