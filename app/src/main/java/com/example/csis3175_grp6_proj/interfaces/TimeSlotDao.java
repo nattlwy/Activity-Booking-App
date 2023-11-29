@@ -8,6 +8,7 @@ import androidx.room.Query;
 import com.example.csis3175_grp6_proj.models.Sport;
 import com.example.csis3175_grp6_proj.models.TimeSlot;
 
+import java.sql.Time;
 import java.util.List;
 
 @Dao
@@ -23,6 +24,9 @@ public interface TimeSlotDao {
 
     @Query("SELECT * FROM timeslots")
     List<TimeSlot> GetAllTimeSlots();
+
+    @Query("SELECT * FROM TIMESLOTS WHERE timeslotid = :id")
+    TimeSlot GetTimeSlotById(String id);
 
     @Query("SELECT * FROM TIMESLOTS WHERE timeslotid not in (SELECT timeslotid FROM BOOKINGS WHERE acivitydate = :date AND status != 'Cancelled' AND venueid = :venueId) AND dayofweek = :dayOfWeek AND hour > :currHour")
     List<TimeSlot> GetAvailableTimeSlotOfTheDay(String date, int dayOfWeek, int currHour, String venueId);

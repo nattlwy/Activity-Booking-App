@@ -80,5 +80,6 @@ public interface BookingDao {
     @Query("SELECT * FROM bookings ORDER BY bookingid DESC LIMIT 1")
     Booking getLastInsertedBooking();
 
-
+    @Query("UPDATE BOOKINGS SET status = 'History' WHERE BOOKINGID = :id")
+    void updateOneBookingToHistory(int id);
 }

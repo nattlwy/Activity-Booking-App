@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
+import androidx.room.Update;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,10 +22,12 @@ import com.example.csis3175_grp6_proj.databases.LeisureLinkDatabase;
 import com.example.csis3175_grp6_proj.models.Booking;
 import com.example.csis3175_grp6_proj.adapters.BookingAdapter;
 import com.example.csis3175_grp6_proj.R;
+import com.example.csis3175_grp6_proj.models.TimeSlot;
 import com.example.csis3175_grp6_proj.models.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -107,9 +110,58 @@ public class UpcomingBookingFragment extends Fragment {
 
     private List<Booking> fetchDataFromlldb() {
         List<Booking> UpcomingBookingFromDB = lldb.bookingDao().GetUpcomingBookings(userId);
+        List<Booking> output = new ArrayList<>();
+        List<Integer> BookingsToBeUpdate = new ArrayList<>();
         Log.d("Upcoming", UpcomingBookingFromDB.size() + " upcoming bookings in db");
-
-        return UpcomingBookingFromDB;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int currYear = calendar.get(Calendar.YEAR);
+        int currMonth = calendar.get(Calendar.MONTH)+1;
+        int currDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        for (Booking b : UpcomingBookingFromDB) {
+            String[] dateComp = b.getActivityDate().split("/");
+            int year = Integer.parseInt(dateComp[2]);
+            int month = Integer.parseInt(dateComp[1]);
+            int dayOfMonth = Integer.parseInt(dateComp[0]);
+            Log.d("UpdateBooking", String.format("%s/%s/%s vs %s/%s/%s", year, month, dayOfMonth, currYear, currMonth, currDayOfMonth));
+            TimeSlot ts = lldb.timeSlotDao().GetTimeSlotById(b.getTimeSlotId());
+            int hour = ts.getHour();
+            if (year < currYear) {
+                BookingsToBeUpdate.add(b.getBookingId());
+            }
+            else if (year > currYear) {
+                output.add(b);
+            }
+            else {
+                if (month < currMonth) {
+                    BookingsToBeUpdate.add(b.getBookingId());
+                }
+                else if (month > currMonth) {
+                    output.add(b);
+                }
+                else {
+                    if (dayOfMonth < currDayOfMonth) {
+                        BookingsToBeUpdate.add(b.getBookingId());
+                    }
+                    else if (dayOfMonth > currDayOfMonth) {
+                        output.add(b);
+                    }
+                    else {
+                        if (hour < calendar.get(Calendar.HOUR_OF_DAY)) {
+                            BookingsToBeUpdate.add(b.getBookingId());
+                        }
+                        else {
+                            output.add(b);
+                        }
+                    }
+                }
+            }
+        }
+        Log.d("UpdateBooking", output.size() + " " + BookingsToBeUpdate.size());
+        for (int id : BookingsToBeUpdate) {
+            lldb.bookingDao().updateOneBookingToHistory(id);
+        }
+        return output;
     }
 
 
