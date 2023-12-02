@@ -136,6 +136,10 @@ public class Booking {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (calendar.get(Calendar.HOUR_OF_DAY) >= 19) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+        }
         ActivityDate = String.format("%s/%s/%s", year, month, day);
     }
 

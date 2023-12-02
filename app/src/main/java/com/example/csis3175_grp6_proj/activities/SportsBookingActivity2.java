@@ -88,7 +88,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar today = Calendar.getInstance();
         int dayOfMon = today.get(Calendar.DAY_OF_MONTH);
-        if (today.get(Calendar.HOUR_OF_DAY) > 19)
+        if (today.get(Calendar.HOUR_OF_DAY) >= 19)
             dayOfMon++;
         String todayStr = sdf.format(today.getTime());
         CurrBookingDayOfWeek = today.get(Calendar.DAY_OF_WEEK) - 1;
@@ -114,7 +114,7 @@ public class SportsBookingActivity2 extends AppCompatActivity {
 
         // calendar
         CalendarView calendarView = findViewById(R.id.calendar);
-        if (today.get(Calendar.HOUR_OF_DAY) > 19) {
+        if (today.get(Calendar.HOUR_OF_DAY) >= 19) {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 0);
             cal.add(Calendar.DAY_OF_MONTH, 1);
