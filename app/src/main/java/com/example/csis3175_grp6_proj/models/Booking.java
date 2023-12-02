@@ -140,7 +140,7 @@ public class Booking {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             day = calendar.get(Calendar.DAY_OF_MONTH);
         }
-        ActivityDate = String.format("%s/%s/%s", year, month, day);
+        ActivityDate = String.format("%s/%s/%s", day, month, year);
     }
 
 
