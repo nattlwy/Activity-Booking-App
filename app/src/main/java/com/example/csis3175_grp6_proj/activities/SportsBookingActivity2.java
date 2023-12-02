@@ -87,11 +87,14 @@ public class SportsBookingActivity2 extends AppCompatActivity {
         Spinner spinnerTimeSlotBooking = findViewById(R.id.spinnerTimeSlotBooking);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar today = Calendar.getInstance();
+        int dayOfMon = today.get(Calendar.DAY_OF_MONTH);
+        if (today.get(Calendar.HOUR_OF_DAY) > 19)
+            dayOfMon++;
         String todayStr = sdf.format(today.getTime());
         CurrBookingDayOfWeek = today.get(Calendar.DAY_OF_WEEK) - 1;
         if (CurrBookingDayOfWeek == 0)
             CurrBookingDayOfWeek = 7;
-        LoadAvailableTimeSlotsFromDB(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), CurrBookingDayOfWeek, CurrBooking.getVenueId());
+        LoadAvailableTimeSlotsFromDB(today.get(Calendar.YEAR), today.get(Calendar.MONTH), dayOfMon, CurrBookingDayOfWeek, CurrBooking.getVenueId());
 //        ArrayAdapter<String> arrAdapter = new ArrayAdapter<>(SportsBookingActivity2.this, android.R.layout.simple_spinner_item, availableTimeslotStrs);
 //        arrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinnerTimeSlotBooking.setAdapter(arrAdapter);
@@ -111,7 +114,14 @@ public class SportsBookingActivity2 extends AppCompatActivity {
 
         // calendar
         CalendarView calendarView = findViewById(R.id.calendar);
-        calendarView.setMinDate(System.currentTimeMillis());
+        if (today.get(Calendar.HOUR_OF_DAY) > 19) {
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+            calendarView.setMinDate(cal.getTimeInMillis());
+        }
+        else
+            calendarView.setMinDate(System.currentTimeMillis());
         calendarView.setMaxDate(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
