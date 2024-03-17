@@ -1,4 +1,4 @@
-This is a group project to build an android app that helps to digitalize the activity booking process of Burnaby Recreation Center. 
+This is a group project to build an android app that helps to digitalize the activity booking process of Burnaby Recreation Center. Language used: Java
 
 Feature specifications
 - User is forced to create an account or login to use the application
